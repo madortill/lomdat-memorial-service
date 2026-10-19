@@ -1,0 +1,173 @@
+.page {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    background-color: #E9F3FF;
+    overflow: hidden;
+    isolation: isolate;
+    direction: rtl;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(35deg,
+            transparent 70%,
+            rgba(177, 207, 237, 0.2) 70%);
+    pointer-events: none;
+}
+
+.boardArea {
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(78vw, 112vh, 78rem);
+    aspect-ratio: 1.61;
+    z-index: 2;
+}
+
+.corkBoard {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.boardContent {
+    position: absolute;
+    inset: 6.5% 4% 6% 4%;
+    background-color: #fff5bee0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.welcomeText {
+    color: #58320F;
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(1.1rem, 1.65vw, 2.2rem);
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 0.5rem;
+}
+
+.logos {
+    position: absolute;
+    top: clamp(1rem, 3vh, 2rem);
+    right: clamp(1rem, 3vw, 3rem);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: clamp(0.5rem, 1vw, 1rem);
+    z-index: 10;
+}
+
+.bahadLogo {
+    width: clamp(3rem, 5vw, 5.5rem);
+    height: auto;
+    display: block;
+}
+
+.tillLogo {
+    width: clamp(2.5rem, 4.3vw, 5em);
+    height: auto;
+    display: block;
+}
+
+.title {
+    color: #58320F;
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(2rem, 4.5vw, 6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 0 clamp(1.5rem, 6vh, 4rem);
+}
+
+.startBtn {
+    position: relative;
+    min-width: clamp(9rem, 16vw, 15rem);
+    min-height: clamp(2rem, 4.5vh, 3rem);
+    padding: 0.35rem 1.6rem;
+    border: none;
+    border-radius: 999rem;
+    background-color: #BF711D;
+    color: white;
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(0.9rem, 1.15vw, 1.35rem);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 3;
+}
+
+.startBtn:hover {
+    transform: scale(1.06);
+    background-color: #A95C13;
+}
+
+.startBtn:active {
+    transform: scale(0.97);
+}
+
+.buttonArrow {
+    font-size: 1.5em;
+    font-weight: 400;
+    line-height: 0.7;
+}
+
+.aboutNote {
+    position: absolute;
+    bottom: 12%;
+    right: 7%;
+    width: clamp(4rem, 8vw, 7rem);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #DFE9C7;
+    color: #4D7774;
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(0.85rem, 1.15vw, 1.25rem);
+    font-weight: 400;
+    transform: rotate(18deg);
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+    z-index: 2;
+}
+
+.plant {
+    position: absolute;
+    bottom: 5%;
+    left: -0.5%;
+    width: clamp(6rem, 13vw, 15rem);
+    height: auto;
+    z-index: 4;
+    pointer-events: none;
+    user-select: none;
+}
+
+.table {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: clamp(2.5rem, 9vh, 6rem);
+    object-fit: fill;
+    display: block;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+}

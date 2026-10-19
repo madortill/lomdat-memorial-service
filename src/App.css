@@ -1,0 +1,103 @@
+@font-face {
+    font-family: "Ploni";
+    src: url("./assets/fonts/ploni/ploni-regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ploni";
+    src: url("./assets/fonts/ploni/ploni-bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Yuval";
+    src: url("./assets/fonts/yuval/OHYuvalGabay-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family: "Ploni", sans-serif;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    font-size: calc(1vh + 0.5vw);
+    overflow: hidden;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: #E9F3FF;
+}
+
+::selection {
+    background-color: #11556C;
+    color: white;
+}
+
+.loading {
+    white-space: nowrap;
+    position: absolute;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #88563B;
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(1.5rem, 5vw, 4rem);
+    font-style: normal;
+    line-height: normal;
+}
+
+.app-loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: #FFFCE9;
+    color: #65ACC7;
+    font-family: "PloniB", sans-serif;
+    font-size: 1.2rem;
+}
+
+.app-loading-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.3rem solid rgba(46, 134, 166, 0.2);
+    border-top-color: #65ACC7;
+    border-radius: 50%;
+    animation: loading-spin 0.8s linear infinite;
+}
+
+@keyframes loading-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

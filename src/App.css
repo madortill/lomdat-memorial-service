@@ -131,7 +131,7 @@ body {
 .app-plant {
     position: absolute;
     bottom: 5%;
-    left: -1.5%;
+    left: -0.5%;
     width: clamp(6rem, 13vw, 15rem);
     height: auto;
     z-index: 10;

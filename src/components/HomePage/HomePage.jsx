@@ -38,7 +38,7 @@ const topics = [
     },
     {
         id: "militaryMemorials",
-        title: "אזכרות עפ״י וגיבורי ישראל / אזכרות מקורבים",
+        title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים",
         color: "pink",
         popupColor: "#F9DFD7",
         type: "topic"

@@ -1,0 +1,399 @@
+.page {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: transparent;
+    direction: rtl;
+    isolation: isolate;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(24deg,
+            transparent 70%,
+            rgba(177, 207, 237, 0.2) 70%);
+    pointer-events: none;
+}
+
+
+
+.boardArea {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(78vw, 112vh, 78rem);
+    aspect-ratio: 1.61;
+    z-index: 2;
+}
+
+.corkBoard {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+}
+
+.notesGrid {
+    position: absolute;
+    inset: 13% 12% 13% 12%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    column-gap: 11%;
+    row-gap: 13%;
+    align-items: center;
+    justify-items: center;
+}
+
+.note {
+    position: relative;
+    width: 83%;
+    height: 85%;
+    border: 0.08rem solid rgba(80, 56, 42, 0.5);
+    border-radius: 0.22rem;
+    background-color: #FFF6DA;
+    color: #087393;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    cursor: pointer;
+    box-shadow: 0.18rem 0.3rem 0.35rem rgba(73, 44, 18, 0.2);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.note:nth-child(1) {
+    transform: rotate(5deg);
+}
+
+.note:nth-child(2) {
+    transform: rotate(-3deg);
+}
+
+.note:nth-child(3) {
+    transform: rotate(4deg);
+}
+
+.note:nth-child(4) {
+    transform: rotate(-4deg);
+}
+
+.note:nth-child(5) {
+    transform: rotate(2deg);
+}
+
+.note:nth-child(6) {
+    transform: rotate(-5deg);
+}
+
+.note:hover:not(:disabled) {
+    filter: brightness(1.05);
+    transform: translateY(-0.3rem) rotate(0deg) scale(1.05);
+}
+
+.note:disabled {
+    cursor: default;
+    filter: saturate(0.55);
+    opacity: 0.7;
+}
+
+.noteTitle {
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(0.85rem, 1.35vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    text-align: center;
+    max-width: 100%;
+}
+
+.cream {
+    background-color: #FFF6DB;
+}
+
+.green {
+    background-color: #E2EAD2;
+}
+
+.purple {
+    background-color: #DCD4ED;
+}
+
+.blue {
+    background-color: #A5D9F2;
+}
+
+.pink {
+    background-color: #F9DFD7;
+}
+
+.yellow {
+    background-color: #FFE59B;
+}
+
+.pin {
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(0.65rem, 1.3vw, 1.15rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+            #F5B8B3,
+            #BF4F4A 75%);
+    border: 0.07rem solid #87463E;
+    box-shadow: 0.06rem 0.15rem 0.1rem rgba(0, 0, 0, 0.25);
+}
+
+.checkmark,
+.lock {
+    position: absolute;
+    top: -0.35rem;
+    right: -0.35rem;
+    width: clamp(1.1rem, 2vw, 1.7rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #65B46A;
+    font-size: clamp(0.7rem, 1vw, 1rem);
+    font-weight: 700;
+}
+
+.lock {
+    background-color: #AC9B89;
+    font-size: clamp(0.55rem, 0.8vw, 0.8rem);
+}
+
+.exercises {
+    position: absolute;
+    bottom: clamp(2rem, 5.8vh, 4rem);
+    right: clamp(2rem, 6vw, 7rem);
+    display: flex;
+    direction: rtl;
+    align-items: flex-end;
+    gap: clamp(0.7rem, 1.5vw, 1.8rem);
+    z-index: 5;
+}
+
+.exercise {
+    position: relative;
+    width: clamp(5.5rem, 11vw, 10rem);
+    height: clamp(2.7rem, 6vh, 4.5rem);
+    border: 0.13rem solid #947052;
+    border-radius: 0.7rem 0.7rem 0.4rem 0.4rem;
+    background-color: #F6E2BF;
+    color: #58320F;
+    box-shadow: 0 0.3rem 0 rgba(87, 57, 32, 0.25);
+    font-size: clamp(0.8rem, 1vw, 1.15rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.exercise:hover:not(:disabled) {
+    transform: translateY(-0.4rem);
+}
+
+.exercise:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+.exercise1 {
+    background-color: #F1DDC4;
+}
+
+.exercise2 {
+    background-color: #A7D6D1;
+}
+
+.exercise3 {
+    background-color: #D4C4A9;
+}
+
+
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(34, 22, 13, 0.16);
+    pointer-events: auto;
+    animation: backdropIn 0.42s ease both;
+}
+
+.backdropClosing {
+    animation: backdropOut 0.42s ease both;
+}
+
+.expandedNote {
+    position: absolute;
+    top: 6vh;
+    left: 7vw;
+    width: 86vw;
+    height: 86vh;
+    background-color: #FFF1D5;
+    border: clamp(0.45rem, 1.3vw, 1.4rem) solid #B88C5F;
+    border-radius: clamp(0.5rem, 1vw, 1rem);
+    box-shadow: 0 1.5rem 4rem rgba(39, 24, 12, 0.35);
+    overflow: hidden;
+    pointer-events: auto;
+    animation: noteExpand 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.expandedNoteClosing {
+    animation: noteCollapse 0.42s ease-in-out both;
+}
+
+.expandedContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: contentAppear 0.3s 0.35s both;
+}
+
+.expandedNoteClosing .expandedContent {
+    animation: contentDisappear 0.15s both;
+}
+
+.homeBtn {
+    position: absolute;
+    top: clamp(0.8rem, 2vh, 1.5rem);
+    right: clamp(0.8rem, 2vw, 2rem);
+    width: clamp(2.5rem, 3.5vw, 3.7rem);
+    aspect-ratio: 1;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 20;
+    transition: transform 0.2s ease;
+}
+
+.homeBtn img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.homeBtn:hover { transform: scale(1.1); }
+.homeBtn:focus-visible { outline: 2px solid #BF711D; outline-offset: 4px; }
+
+@keyframes noteExpand {
+    from {
+        top: var(--from-top);
+        left: var(--from-left);
+        width: var(--from-width);
+        height: var(--from-height);
+        opacity: 0.9;
+    }
+
+    to {
+        top: 6vh;
+        left: 7vw;
+        width: 86vw;
+        height: 86vh;
+        opacity: 1;
+    }
+}
+
+@keyframes noteCollapse {
+    from {
+        top: 6vh;
+        left: 7vw;
+        width: 86vw;
+        height: 86vh;
+        opacity: 1;
+    }
+
+    to {
+        top: var(--from-top);
+        left: var(--from-left);
+        width: var(--from-width);
+        height: var(--from-height);
+        opacity: 0.9;
+    }
+}
+
+@keyframes backdropIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes backdropOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes contentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes contentDisappear {
+    to {
+        opacity: 0;
+    }
+}
+
+@media (max-height: 700px) {
+    .boardArea {
+        top: 14%;
+        width: min(78vw, 108vh, 75rem);
+    }
+
+    .noteTitle {
+        font-size: clamp(0.7rem, 1.1vw, 1.15rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .expandedNote,
+    .expandedNoteClosing,
+    .backdrop,
+    .backdropClosing,
+    .expandedContent {
+        animation-duration: 0.01ms;
+        animation-delay: 0ms;
+    }
+}

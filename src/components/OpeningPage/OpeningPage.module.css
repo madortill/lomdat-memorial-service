@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 100dvh;
-    background-color: #E9F3FF;
+    background-color: transparent;
     overflow: hidden;
     isolation: isolate;
     direction: rtl;
@@ -59,28 +59,8 @@
     margin: 0 0 0.5rem;
 }
 
-.logos {
-    position: absolute;
-    top: clamp(1rem, 3vh, 2rem);
-    right: clamp(1rem, 3vw, 3rem);
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: clamp(0.5rem, 1vw, 1rem);
-    z-index: 10;
-}
 
-.bahadLogo {
-    width: clamp(3rem, 5vw, 5.5rem);
-    height: auto;
-    display: block;
-}
 
-.tillLogo {
-    width: clamp(2.5rem, 4.3vw, 5em);
-    height: auto;
-    display: block;
-}
 
 .title {
     color: #58320F;
@@ -148,26 +128,3 @@
     z-index: 2;
 }
 
-.plant {
-    position: absolute;
-    bottom: 5%;
-    left: -0.5%;
-    width: clamp(6rem, 13vw, 15rem);
-    height: auto;
-    z-index: 4;
-    pointer-events: none;
-    user-select: none;
-}
-
-.table {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: clamp(2.5rem, 9vh, 6rem);
-    object-fit: fill;
-    display: block;
-    z-index: 3;
-    pointer-events: none;
-    user-select: none;
-}

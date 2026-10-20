@@ -1,0 +1,59 @@
+.sheet {
+    flex: 1;
+    min-height: 0;
+    border-radius: 15px;
+    background: #fff3da;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(.6rem, 2vh, 1.7rem);
+    text-align: center;
+    color: #087393;
+    padding: clamp(1rem, 3vw, 3rem);
+    overflow-y: auto;
+}
+
+.sheet h1 {
+    font-size: clamp(1.4rem, 2.9vw, 3rem);
+}
+
+.sheet p {
+    max-width: 60ch;
+    font-size: clamp(.85rem, 1.2vw, 1.3rem);
+}
+
+.hint {
+    color: #986e56;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .7rem;
+}
+
+.tabs button {
+    border: 0;
+    border-radius: 8px;
+    background: #d8eaf0;
+    padding: .75rem 1rem;
+    color: #087393;
+    cursor: pointer;
+}
+
+.finish {
+    border: 0;
+    border-radius: 25px;
+    background: #b85e34;
+    color: white;
+    padding: .7rem 1.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.finish:disabled {
+    opacity: .4;
+    cursor: default;
+}

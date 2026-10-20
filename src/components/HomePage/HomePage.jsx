@@ -1,12 +1,11 @@
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useState } from "react";
 import styles from "./HomePage.module.css";
 
 import corkBoard from "../../assets/img/corkBoard.svg";
-import homeBtn from "../../assets/img/homeBtn.svg";
 
-import TopicContent from "../Topics/TopicContent";
+import ContentPopup from "../ContentPopup/ContentPopup";
+import { useMemorialProgress } from "../../utils/useMemorialProgress";
 
 const topics = [
     {
@@ -71,85 +70,21 @@ const topics = [
     }
 ];
 
-const STORAGE_KEY = "memorialUnlockedIndex";
-
 const HomePage = () => {
-    const [unlockedIndex, setUnlockedIndex] = useState(() => {
-        const saved = Number(sessionStorage.getItem(STORAGE_KEY) || 0);
-
-        return Number.isInteger(saved)
-            ? Math.max(0, Math.min(saved, topics.length - 1))
-            : 0;
-    });
-
+    const { unlockedIndex, progress, completePage } = useMemorialProgress(topics);
     const [activeTopic, setActiveTopic] = useState(null);
     const [startRect, setStartRect] = useState(null);
-    const [isClosing, setIsClosing] = useState(false);
-
-    useEffect(() => {
-        sessionStorage.setItem(
-            STORAGE_KEY,
-            unlockedIndex.toString()
-        );
-    }, [unlockedIndex]);
-
-    useEffect(() => {
-        if (!activeTopic) return;
-
-        const handleKeyDown = (event) => {
-            if (event.key === "Escape") {
-                setIsClosing(true);
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [activeTopic]);
 
     const openTopic = (topic, index, event) => {
         if (index > unlockedIndex || activeTopic) return;
-
         const rect = event.currentTarget.getBoundingClientRect();
-
-        setStartRect({
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height
-        });
-
-        setIsClosing(false);
+        setStartRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
         setActiveTopic({ ...topic, index });
     };
 
     const closeTopic = () => {
-        if (isClosing) return;
-        setIsClosing(true);
-    };
-
-    const handleAnimationEnd = (event) => {
-        if (event.target !== event.currentTarget) return;
-
-        if (isClosing) {
-            setActiveTopic(null);
-            setStartRect(null);
-            setIsClosing(false);
-        }
-    };
-
-    const handleComplete = () => {
-        if (!activeTopic) return;
-
-        const nextUnlocked = Math.min(
-            activeTopic.index + 1,
-            topics.length - 1
-        );
-
-        setUnlockedIndex((prev) => Math.max(prev, nextUnlocked));
-        closeTopic();
+        setActiveTopic(null);
+        setStartRect(null);
     };
 
     const renderTopic = (topic, index) => {
@@ -220,45 +155,14 @@ const HomePage = () => {
                 })}
             </div>
 
-            {activeTopic && startRect && createPortal(
-                <div className={styles.overlay}>
-                    <div
-                        className={`${styles.backdrop} ${isClosing ? styles.backdropClosing : ""
-                            }`}
-                        onClick={closeTopic}
-                    />
-
-                    <div
-                        className={`${styles.expandedNote} ${isClosing ? styles.expandedNoteClosing : ""
-                            }`}
-                        style={{
-                            "--from-top": `${startRect.top}px`,
-                            "--from-left": `${startRect.left}px`,
-                            "--from-width": `${startRect.width}px`,
-                            "--from-height": `${startRect.height}px`,
-                            backgroundColor: activeTopic.popupColor || "#FFF1D5"
-                        }}
-                        onAnimationEnd={handleAnimationEnd}
-                    >
-                        <button
-                            type="button"
-                            className={styles.homeBtn}
-                            onClick={closeTopic}
-                            aria-label="חזרה ללוח השעם"
-                            title="חזרה ללוח השעם"
-                        >
-                            <img src={homeBtn} alt="" />
-                        </button>
-
-                        <div className={styles.expandedContent}>
-                            <TopicContent
-                                topic={activeTopic}
-                                onComplete={handleComplete}
-                            />
-                        </div>
-                    </div>
-                </div>,
-                document.body
+            {activeTopic && startRect && (
+                <ContentPopup
+                    topic={activeTopic}
+                    startRect={startRect}
+                    onClose={closeTopic}
+                    progress={progress[activeTopic.id]}
+                    onCompletePage={(pageIndex) => completePage(activeTopic.id, pageIndex)}
+                />
             )}
         </div>
     );

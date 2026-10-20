@@ -1,0 +1,22 @@
+.overlay { position: fixed; inset: 0; z-index: 9999; direction: rtl; }
+.backdrop { position: absolute; inset: 0; background: rgba(28, 32, 39, .58); backdrop-filter: blur(5px); animation: fadeIn .45s both; }
+.fadeOut { animation: fadeOut .35s both; }
+.panel { position: fixed; overflow: hidden; transform-origin: center; animation: expand .52s cubic-bezier(.22,1,.36,1) both; }
+.topicPanel { inset: 0; width: 100vw; height: 100dvh; border: 0; border-radius: 0; background-color: #ad835b; background-image: radial-gradient(#8e694b55 1.2px,transparent 1.5px), linear-gradient(140deg,#bd946b,#a97d54); background-size: 28px 28px,cover; }
+.exercisePanel { top: 6vh; left: 6vw; width: 88vw; height: 88dvh; border-radius: clamp(16px,2vw,28px); background: rgba(255,255,255,.83); border: 1px solid rgba(255,255,255,.78); backdrop-filter: blur(18px); box-shadow: 0 0 35px rgba(255,255,255,.56), 0 24px 80px rgba(18,29,40,.32), inset 0 0 18px rgba(255,255,255,.7); }
+.closing { animation: collapse .4s ease-in-out both; }
+.inner { height: 100%; opacity: 0; display: flex; flex-direction: column; padding: clamp(52px,7vh,78px) clamp(22px,5vw,75px) clamp(14px,2vh,24px); transition: opacity .2s; }
+.visible { opacity: 1; }
+.closing .inner { opacity: 0; }
+.homeBtn { position: absolute; z-index: 5; top: clamp(13px,2.8vh,26px); right: clamp(16px,3vw,50px); width: clamp(36px,3.5vw,55px); aspect-ratio: 1; padding: 0; border: 0; background: transparent; cursor: pointer; transition: transform .2s; }
+.homeBtn img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.homeBtn:hover { transform: scale(1.12); }
+.homeBtn:focus-visible { outline: 3px solid #167c9d; border-radius: 50%; }
+.navigation { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: .5rem; color: #146d87; font-size: clamp(12px,1.2vw,17px); }
+.navigation button { border: 0; border-radius: 30px; background: #148bb1; color: #fff; padding: .45rem 1.4rem; font-weight: 700; cursor: pointer; }
+.navigation button:disabled { opacity: .35; cursor: default; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes expand { from { top: var(--from-top); left: var(--from-left); width: var(--from-width); height: var(--from-height); opacity: .92; border-radius: 12px; } to { opacity: 1; } }
+@keyframes collapse { from { opacity: 1; } to { top: var(--from-top); left: var(--from-left); width: var(--from-width); height: var(--from-height); opacity: .92; border-radius: 12px; } }
+@media (prefers-reduced-motion: reduce) { .panel,.closing,.backdrop,.fadeOut { animation-duration: .01ms; } }

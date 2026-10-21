@@ -1,57 +1,75 @@
 .introduction {
-    position: relative;
     width: 100%;
     height: 100%;
     min-height: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: clamp(16px, 2vw, 36px);
     color: #087393;
-    padding: clamp(15px, 2.3vh, 28px) clamp(32px, 5vw, 90px) clamp(10px, 1.8vh, 20px);
+    background: transparent;
     overflow: hidden;
 }
 
+.header {
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.5vh, 20px);
+    padding-top: clamp(32px, 5vh, 60px);
+}
+
 .title {
-    width: 100%;
-    flex: 0 0 auto;
+    align-self: center;
+    justify-self: center;
     text-align: center;
+    max-width: 80%;
+    font-size: clamp(1.4rem, 2.9vw, 3rem);
+    line-height: 1.2;
     font-weight: 700;
-    font-size: clamp(1.4rem, 2.25vw, 2.6rem);
-    line-height: 1.3;
     margin: 0;
 }
 
+.description {
+    width: min(100%, 85ch);
+    margin: 0;
+    text-align: center;
+    font-size: clamp(1vw, 1.3rem, 1.5vw);
+    line-height: 1.55;
+}
+
 .main {
-    flex: 1;
+    grid-row: 2;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: clamp(8px, 1.5vh, 24px);
+}
+
+.carouselGroup {
+    width: 100%;
     min-height: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: clamp(6px, 1.2vh, 14px);
-}
-
-.description {
-    width: min(100%, 76ch);
-    margin: 0;
-    text-align: center;
-    font-size: clamp(12px, 1.05vw, 19px);
-    line-height: 1.55;
 }
 
 .subheading {
     color: #B4534D;
     font-family: "Yuval", "Ploni", sans-serif;
-    font-weight: 400;
-    font-size: clamp(17px, 1.65vw, 29px);
+    font-weight: 700;
+    font-size: clamp(1vw, 1.7rem, 1.8vw);
     line-height: 1.2;
-    margin: clamp(4px, 1vh, 12px) 0 0;
+    margin: 0;
     text-align: center;
 }
 
 .carousel {
     position: relative;
     width: min(100%, 850px);
-    height: clamp(135px, 27vh, 290px);
+    height: clamp(135px, 30vh, 350px);
     flex: 0 1 auto;
     min-height: 115px;
     overflow: visible;
@@ -62,18 +80,21 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 60%;
+    height: 100%;
     border: 0;
-    padding: clamp(10px, 1.4vw, 21px);
+    padding: clamp(10px, 1.9vw, 30px);
     border-radius: clamp(9px, 1vw, 15px);
     background: #B4534D;
-    color: #FFFFFF;
+    color: #fff;
     box-shadow: 0 6px 12px rgba(111, 65, 61, .12);
-    width: 44%;
-    height: 100%;
-    transition: transform .52s cubic-bezier(.22, 1, .36, 1), opacity .4s ease, background-color .4s ease, box-shadow .4s ease;
+    transition:
+        transform .52s cubic-bezier(.22, 1, .36, 1),
+        background-color .4s ease,
+        box-shadow .4s ease;
     transform-origin: center;
     cursor: pointer;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .center {
@@ -121,19 +142,40 @@
 }
 
 .cardTitle {
-    font-size: clamp(13px, 1.2vw, 22px);
+    font-size: clamp(1.1vw, 1.3rem, 1.5vw);
     line-height: 1.2;
 }
 
 .cardText {
-    font-size: clamp(11px, .92vw, 17px);
+    font-size: clamp(1vw, 1.1rem, 1.5vw);
     line-height: 1.45;
     margin: 0;
+}
+
+.visitedSticker {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    width: clamp(23px, 2.2vw, 32px);
+    height: clamp(23px, 2.2vw, 32px);
+    aspect-ratio: 1;
+    border: 2px solid #96c299;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #d7ebd8;
+    color: #50795f;
+    font-weight: 700;
+    font-size: clamp(14px, 1.35vw, 20px);
+    box-shadow: 0 2px 6px rgba(30, 67, 38, .16);
+    z-index: 4;
+    pointer-events: none;
 }
 
 .indicators {
     display: flex;
     flex-direction: row;
+    direction: ltr;
     align-items: center;
     justify-content: center;
     gap: 6px;
@@ -154,7 +196,7 @@
 }
 
 .footer {
-    flex: 0 0 auto;
+    grid-row: 3;
     display: flex;
     justify-content: flex-end;
 }
@@ -185,35 +227,38 @@
     outline-offset: 2px;
 }
 
-@media (max-height: 630px) {
-    .introduction {
-        padding-top: 10px;
-        padding-bottom: 8px;
-    }
-
-    .main {
-        gap: 4px;
-    }
-
-    .description {
-        font-size: clamp(10px, .95vw, 15px);
-        line-height: 1.35;
-    }
-
+@media (max-width: 1500px) {
     .carousel {
-        height: clamp(110px, 24vh, 185px);
+        width: min(78%, 850px);
     }
 
-    .subheading {
-        margin-top: 2px;
+    .card {
+        width: 55%;
+    }
+
+    .left {
+        transform: translate(30%, -50%) scale(.71);
+    }
+
+    .right {
+        transform: translate(-130%, -50%) scale(.71);
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 1100px) {
+    .carousel {
+        width: 75%;
+    }
 
-    .card,
-    .cardCopy,
-    .dot {
-        transition-duration: .01ms;
+    .card {
+        width: 50%;
+    }
+
+    .left {
+        transform: translate(20%, -50%) scale(.71);
+    }
+
+    .right {
+        transform: translate(-120%, -50%) scale(.71);
     }
 }

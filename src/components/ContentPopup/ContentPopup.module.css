@@ -192,21 +192,29 @@
 }
 
 .navigation {
+    width: 100%;
     flex: 0 0 auto;
     display: flex;
+    direction: rtl;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem clamp(16px, 4vw, 56px) clamp(14px, 2vh, 24px);
     gap: 1rem;
 }
 
+.navigation button:last-child {
+    margin-right: auto;
+}
+
 .navigation button {
     border: 0;
-    border-radius: 30px;
-    background: #148bb1;
-    color: #fff;
-    padding: 0.45rem 1.4rem;
+    border-radius: 999px;
+    min-width: 90px;
+    padding: 5px 15px;
+    color: white;
+    background: #078EB2;
     font-weight: 700;
+    font-size: clamp(12px, .9vw, 16px);
     cursor: pointer;
 }
 

@@ -1,11 +1,79 @@
-.content { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(.7rem,2vh,1.5rem); color: #087393; text-align:center; overflow:auto; }
-.content header { display:flex; width:100%; align-items:center; flex-direction:column; gap:.5rem; }
-.content header span { color: #d69a60; align-self:flex-start; font-weight:700; }
-.content h1 { font-size:clamp(1.4rem,2.6vw,2.6rem); }
-.content p { font-size: clamp(.9rem,1.4vw,1.3rem); }
-.answers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(.6rem,2vw,1.4rem); width:min(100%,780px); }
-.answers button { min-height:clamp(60px,12vh,120px); border:2px solid transparent; border-radius:12px; background:rgba(245,251,255,.94); color:#146983; padding:1rem; cursor:pointer; font-size:clamp(.8rem,1.1vw,1.1rem); }
-.answers button.selected { border-color: #168cb4; background: #d5edf9; }
-.actions { display:flex; align-items:center; flex-direction:column; gap:.5rem; }
-.actions button { border:0; background:#1591ba; color:white; font-weight:700; border-radius:24px; padding:.55rem 1.8rem; cursor:pointer; }
-.actions button:disabled { opacity:.4; cursor:default; }
+.content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(.7rem, 2vh, 1.5rem);
+    color: #087393;
+    text-align: center;
+    overflow: auto;
+}
+
+.content header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.content header span {
+    color: #d69a60;
+    align-self: flex-start;
+    font-weight: 700;
+}
+
+.content h1 {
+    font-size: clamp(1.4rem, 2.6vw, 2.6rem);
+}
+
+.content p {
+    font-size: clamp(.9rem, 1.4vw, 1.3rem);
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(.6rem, 2vw, 1.4rem);
+    width: min(100%, 780px);
+}
+
+.answers button {
+    min-height: clamp(60px, 12vh, 120px);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: rgba(245, 251, 255, .94);
+    color: #146983;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: clamp(.8rem, 1.1vw, 1.1rem);
+}
+
+.answers button.selected {
+    border-color: #168cb4;
+    background: #d5edf9;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.actions button {
+    border: 0;
+    background: #1591ba;
+    color: white;
+    font-weight: 700;
+    border-radius: 24px;
+    padding: .55rem 1.8rem;
+    cursor: pointer;
+}
+
+.actions button:disabled {
+    opacity: .4;
+    cursor: default;
+}

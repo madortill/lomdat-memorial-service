@@ -1,6 +1,6 @@
 export const pageCounts = {
     introduction: 1,
-    memorialProcess: 1,
+    memorialProcess: 3,
     technicalDetails: 1,
     injuredRelatives: 1,
     militaryMemorials: 1,

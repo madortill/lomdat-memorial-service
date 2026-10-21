@@ -20,6 +20,7 @@
 }
 
 .body {
+    flex: 1;
     grid-row: 2;
     min-height: 0;
     display: flex;

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import styles from "./Introduction.module.css";
+import TopicLayout from "./TopicLayout/TopicLayout";
 
 const cards = [
     {
@@ -76,19 +77,27 @@ export default function Introduction({ onPageComplete }) {
     };
 
     return (
-        <section
+        <TopicLayout
+            title="מבוא"
             className={styles.introduction}
-            dir="rtl"
-            aria-label="מבוא לניהול תיאום אזכרה"
-        >
-            <div className={styles.header}>
-                <h1 className={styles.title}>מבוא</h1>
-
-                <p className={styles.description}>
+            ariaLabel="מבוא לניהול תיאום אזכרה"
+            headerContent={<p className={styles.description}>
                     צבא ההגנה לישראל מתחייב לשימור הקשר עם המשפחות השכולות ולקיום אזכרה שנתית צבאית לזכר הנופלים. קיום האזכרה מתבצעת כל עוד המשפחה מעוניינת בהשתתפות נציגי צה"ל ויש קרוב משפחה מולו ניתן לתאם. מדובר בתהליך המתקיים לאורך שנים ומהווה חלק משמעותי ומרכזי בשימור הקשר עם המשפחות השכולות.
-                </p>
-            </div>
-
+                </p>}
+            footer={
+                <div className={styles.footer}>
+                    <button
+                        type="button"
+                        className={styles.understood}
+                        onClick={finish}
+                        disabled={!allVisited || isSubmitting}
+                        title={!allVisited ? "כדי להמשיך יש לעבור על שלושת הדגשים" : undefined}
+                    >
+                        הבנתי!
+                    </button>
+                </div>
+            }
+        >
             <div className={styles.main}>
                 <div className={styles.carouselGroup}>
                     <h2 className={styles.subheading}>
@@ -167,21 +176,6 @@ export default function Introduction({ onPageComplete }) {
                 </div>
             </div>
 
-            <div className={styles.footer}>
-                <button
-                    type="button"
-                    className={styles.understood}
-                    onClick={finish}
-                    disabled={!allVisited || isSubmitting}
-                    title={
-                        !allVisited
-                            ? "כדי להמשיך יש לעבור על שלושת הדגשים"
-                            : undefined
-                    }
-                >
-                    הבנתי!
-                </button>
-            </div>
-        </section>
+        </TopicLayout>
     );
 }

@@ -1,32 +1,5 @@
 .page {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    display: grid;
-    grid-template-rows: minmax(100px, 21%) minmax(0, 1fr);
-    padding: clamp(12px, 1.8vw, 30px);
     color: #30451C;
-    background: transparent;
-    overflow: hidden;
-}
-
-.header {
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(6px, 1vh, 12px);
-    padding: 0;
-    text-align: center;
-}
-
-.title {
-    margin: 0;
-    color: #087393;
-    font-size: clamp(1.4rem, 2.9vw, 3rem);
-    line-height: 1.2;
-    font-weight: 700;
 }
 
 .instructions {
@@ -49,6 +22,8 @@
 }
 
 .main {
+    flex: 1;
+    width: 100%;
     width: 100%;
     min-height: 0;
     display: grid;

@@ -1,6 +1,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 import styles from "./MemorialProcess.module.css";
+import TopicLayout from "../TopicLayout/TopicLayout";
 
 import iconCursor from "../../../assets/img/iconCursor.svg";
 import timelineArrow from "../../../assets/img/greenLine.svg";
@@ -157,34 +158,21 @@ export default function MemorialProcess({ onPageReady }) {
         }
     };
 
-    const handleNext = () => {
-        if (!allVisited || isSubmitting) return;
-
-        setIsSubmitting(true);
-        onPageComplete?.();
-    };
 
     return (
-        <section
+        <TopicLayout
+            title="תהליך תיאום אזכרה"
             className={styles.page}
-            dir="rtl"
-            aria-label="תהליך תיאום אזכרה"
-        >
-            <header className={styles.header}>
-                <h1 className={styles.title}>
-                    תהליך תיאום אזכרה
-                </h1>
-
-                <p className={styles.instructions}>
+            ariaLabel="תהליך תיאום אזכרה"
+            headerContent={<p className={styles.instructions}>
                     <img
                         src={iconCursor}
                         alt=""
                         className={styles.instructionIcon}
                     />
                     לחצו על העיגולים למטה כדי ללמוד עוד
-                </p>
-            </header>
-
+                </p>}
+        >
             <div className={styles.main}>
                 <div
                     className={styles.timeline}
@@ -256,6 +244,6 @@ export default function MemorialProcess({ onPageReady }) {
                 </div>
             </div>
 
-        </section>
+        </TopicLayout>
     );
 }

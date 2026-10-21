@@ -1,6 +1,8 @@
 import styles from "./TopicContent.module.css";
+import TopicLayout from "./TopicLayout/TopicLayout";
 import Introduction from "./Introduction";
 import MemorialProcess from "./MemorialProcess/MemorialProcess";
+import ChazzanCoordination from "./MemorialProcess/ChazzanCoordination";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -11,29 +13,31 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
         return <MemorialProcess onPageReady={onPageReady} />;
     }
 
+    if (topic.id === "memorialProcess" && pageIndex === 1) {
+        return <ChazzanCoordination onPageReady={onPageReady} />;
+    }
+
     if (topic.id === "memorialProcess") {
         return (
-            <section className={styles.sheet}>
-                <h1>תהליך תיאום אזכרה</h1>
+            <TopicLayout title="תהליך תיאום אזכרה">
                 <div className={styles.body}>
                     <p>עמוד {pageIndex + 1} מתוך 3 — כאן נכניס את התוכן של המסך הירוק הבא.</p>
                     <button type="button" className={styles.finish} onClick={onPageReady}>
                         סיימתי לעיין בעמוד (בדיקה זמנית)
                     </button>
                 </div>
-            </section>
+            </TopicLayout>
         );
     }
 
     return (
-        <section className={styles.sheet}>
-            <h1>{topic.title}</h1>
+        <TopicLayout title={topic.title}>
             <div className={styles.body}>
                 <p>כאן יופיע בהמשך התוכן הלימודי של הנושא.</p>
                 <button type="button" className={styles.finish} onClick={onPageComplete}>
                     הבנתי, סיום העמוד
                 </button>
             </div>
-        </section>
+        </TopicLayout>
     );
 }

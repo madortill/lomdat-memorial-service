@@ -8,66 +8,15 @@ import ContentPopup from "../ContentPopup/ContentPopup";
 import { useMemorialProgress } from "../../utils/useMemorialProgress";
 
 const topics = [
-    {
-        id: "introduction",
-        title: "מבוא",
-        color: "cream",
-        popupColor: "#FFF1D5",
-        type: "topic"
-    },
-    {
-        id: "memorialProcess",
-        title: "תהליך תיאום אזכרה",
-        color: "green",
-        popupColor: "#E2EAD2",
-        type: "topic"
-    },
-    {
-        id: "technicalDetails",
-        title: "פרטים טכניים",
-        color: "purple",
-        popupColor: "#DCD4ED",
-        type: "topic"
-    },
-    {
-        id: "injuredRelatives",
-        title: "דגשים לקצין הנפגעים",
-        color: "blue",
-        popupColor: "#D7ECF8",
-        type: "topic"
-    },
-    {
-        id: "militaryMemorials",
-        title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים",
-        color: "pink",
-        popupColor: "#F9DFD7",
-        type: "topic"
-    },
-    {
-        id: "casualtyGuidelines",
-        title: "חללי נצר אחרון",
-        color: "yellow",
-        popupColor: "#FFE59B",
-        type: "topic"
-    },
-    {
-        id: "exercise1",
-        title: "תרגול 1",
-        popupColor: "#F1DDC4",
-        type: "exercise"
-    },
-    {
-        id: "exercise2",
-        title: "תרגול 2",
-        popupColor: "#A7D6D1",
-        type: "exercise"
-    },
-    {
-        id: "exercise3",
-        title: "תרגול 3",
-        popupColor: "#D4C4A9",
-        type: "exercise"
-    }
+    { id: "introduction", title: "מבוא", color: "cream", popupColor: "#FFF1D5", type: "topic" },
+    { id: "memorialProcess", title: "תהליך תיאום אזכרה", color: "green", popupColor: "#E2EAD2", type: "topic" },
+    { id: "exercise1", title: "תרגול 1", popupColor: "#F1DDC4", type: "exercise" },
+    { id: "technicalDetails", title: "פרטים טכניים", color: "purple", popupColor: "#DCD4ED", type: "topic" },
+    { id: "injuredRelatives", title: "דגשים לקצין הנפגעים", color: "blue", popupColor: "#D7ECF8", type: "topic" },
+    { id: "exercise2", title: "תרגול 2", popupColor: "#A7D6D1", type: "exercise" },
+    { id: "militaryMemorials", title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים", color: "pink", popupColor: "#F9DFD7", type: "topic" },
+    { id: "casualtyGuidelines", title: "חללי נצר אחרון", color: "yellow", popupColor: "#FFE59B", type: "topic" },
+    { id: "exercise3", title: "תרגול 3", popupColor: "#D4C4A9", type: "exercise" }
 ];
 
 const HomePage = () => {
@@ -128,13 +77,13 @@ const HomePage = () => {
                 />
 
                 <div className={styles.notesGrid}>
-                    {topics.slice(0, 6).map(renderTopic)}
+                    {topics.map((topic, index) => ({ topic, index })).filter(({ topic }) => topic.type === "topic").map(({ topic, index }) => renderTopic(topic, index))}
                 </div>
             </div>
 
             <div className={styles.exercises}>
-                {topics.slice(6).map((topic, index) => {
-                    const topicIndex = index + 6;
+                {topics.filter(topic => topic.type === "exercise").map((topic, index) => {
+                    const topicIndex = topics.findIndex(item => item.id === topic.id);
                     const isUnlocked = topicIndex <= unlockedIndex;
 
                     return (

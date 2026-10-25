@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(5px, 0.6vw, 10px);
+    gap: clamp(0.3rem, 0.6vw, 0.65rem);
     margin: 0;
     color: #087393;
     font-size: clamp(13px, 1.1vw, 21px);
@@ -15,8 +15,8 @@
 }
 
 .instructionIcon {
-    width: clamp(16px, 1.6vw, 26px);
-    height: clamp(16px, 1.6vw, 26px);
+    width: clamp(0.8rem, 1.3vw, 1.7rem);
+    height: clamp(0.8rem, 1.3vw, 1.7rem);
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -255,4 +255,26 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* עיגול שעדיין לא נצפה */
+.circle.unvisitedCircle {
+    background: #F3F0CE;
+    color: #87A45F;
+}
+
+/* עיגול שכבר נצפה */
+.circle1.visitedCircle {
+    background: #89AC43;
+    color: #fff;
+}
+
+.circle2.visitedCircle {
+    background: #527321;
+    color: #fff;
+}
+
+.circle3.visitedCircle {
+    background: #344D0D;
+    color: #fff;
 }

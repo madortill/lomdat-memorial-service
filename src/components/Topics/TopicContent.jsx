@@ -3,6 +3,7 @@ import TopicLayout from "./TopicLayout/TopicLayout";
 import Introduction from "./Introduction";
 import MemorialProcess from "./MemorialProcess/MemorialProcess";
 import ChazzanCoordination from "./MemorialProcess/ChazzanCoordination";
+import RepresentativesFlipCards from "./MemorialProcess/RepresentativesFlipCards";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -15,6 +16,14 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
 
     if (topic.id === "memorialProcess" && pageIndex === 1) {
         return <ChazzanCoordination onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "memorialProcess" && pageIndex === 2) {
+        return (
+            <RepresentativesFlipCards
+                onPageReady={onPageReady}
+            />
+        );
     }
 
     if (topic.id === "memorialProcess") {

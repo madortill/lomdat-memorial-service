@@ -191,6 +191,7 @@ export default function MemorialProcess({ onPageReady }) {
                                 className={[
                                     styles.circle,
                                     styles[`circle${index + 1}`],
+                                    isVisited ? styles.visitedCircle : styles.unvisitedCircle,
                                     isActive ? styles.activeCircle : "",
                                     isNext ? styles.glowingCircle : ""
                                 ].filter(Boolean).join(" ")}

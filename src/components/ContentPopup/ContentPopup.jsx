@@ -45,7 +45,6 @@ export default function ContentPopup({ topic, startRect, onClose, progress, onCo
     const [ready, setReady] = useState(false);
     const [readyPages, setReadyPages] = useState(() => [...completedPages]);
     const isExercise = topic.type === "exercise";
-    const isMemorial = topic.id === "memorialProcess";
 
     useEffect(() => {
         const onKeyDown = (event) => {
@@ -76,11 +75,16 @@ export default function ContentPopup({ topic, startRect, onClose, progress, onCo
 
     const goForward = () => {
         if (closing || !canMoveForward) return;
-        if (isMemorial && !completedPages.includes(pageIndex)) {
+
+        if (!completedPages.includes(pageIndex)) {
             onCompletePage(pageIndex);
         }
-        if (pageIndex === pageCount - 1) close();
-        else setPageIndex(index => index + 1);
+
+        if (pageIndex === pageCount - 1) {
+            close();
+        } else {
+            setPageIndex(index => index + 1);
+        }
     };
 
     const navigation = pageCount > 1 && (

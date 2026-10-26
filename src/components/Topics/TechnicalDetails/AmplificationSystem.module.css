@@ -4,11 +4,12 @@
 
 .instructions {
     display: flex;
-    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    gap: clamp(0.3rem, 0.6vw, 0.7rem);
+    flex-direction: row-reverse;
+    gap: clamp(0.3rem, 0.6vw, 0.65rem);
     margin: 0;
+
     color: #087393;
     font-size: clamp(0.9rem, 1.1vw, 1.3rem);
     line-height: 1.35;
@@ -16,11 +17,13 @@
 }
 
 .cursor {
-    width: clamp(1rem, 1.6vw, 1.7rem);
-    height: clamp(1rem, 1.6vw, 1.7rem);
+    width: clamp(0.8rem, 1.3vw, 1.7rem);
+    height: clamp(0.8rem, 1.3vw, 1.7rem);
     object-fit: contain;
     flex-shrink: 0;
 }
+
+/* פריסת המיקסר ותיבת ההסבר */
 
 .stage {
     display: grid;
@@ -28,13 +31,20 @@
     grid-template-columns: 0fr minmax(0, 1fr);
     align-items: center;
     gap: 0;
+
     width: min(100%, 75rem);
     height: 100%;
     min-height: 0;
     margin-inline: auto;
-    padding: clamp(0.4rem, 1vh, 1rem) clamp(0.5rem, 2vw, 2rem);
+
+    padding:
+        clamp(0.4rem, 1vh, 1rem) clamp(0.5rem, 2vw, 2rem);
+
     box-sizing: border-box;
-    transition: grid-template-columns 0.65s cubic-bezier(0.2, 0.75, 0.25, 1), gap 0.65s ease;
+
+    transition:
+        grid-template-columns 0.65s cubic-bezier(0.2, 0.75, 0.25, 1),
+        gap 0.65s ease;
 }
 
 .stageExpanded {
@@ -60,22 +70,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     box-sizing: border-box;
     width: 100%;
-    max-height: min(100%, 28rem);
-    min-height: clamp(9rem, 30vh, 19rem);
+    height: clamp(12rem, 40vh, 25rem);
+    min-height: 0;
+
     padding: clamp(0.8rem, 2vw, 2rem);
+
     border: 0.15rem dashed #6f3daf;
     border-radius: clamp(0.5rem, 0.9vw, 0.9rem);
+
     background: #e9dcfa;
     color: #381076;
+
     overflow-y: auto;
-    animation: infoAppear 0.4s ease both;
 }
 
 .infoBox p {
     margin: 0;
-    font-size: clamp(0.9rem, 1.3vw, 1.45rem);
+    font-size: clamp(0.9rem, 1.4vw, 1.5rem);
     line-height: 1.5;
     text-align: center;
 }
@@ -83,6 +97,8 @@
 .infoBox strong {
     font-weight: 700;
 }
+
+/* מערכת ההגברה */
 
 .mixerColumn {
     display: flex;
@@ -93,117 +109,223 @@
 
 .mixer {
     position: relative;
-    height: min(100%, 62vh);
+    height: min(100%, 42vh);
     max-width: 100%;
-    aspect-ratio: 491 / 574;
+    aspect-ratio: 491 / 369;
     flex: 0 1 auto;
 }
 
 .mixerImage {
+    display: block;
     width: 100%;
     height: 100%;
-    display: block;
     object-fit: contain;
     user-select: none;
 }
 
-/* Coordinates are measured against the SVG's 491 x 574 viewBox. */
+/* מיקומי המסילות ביחס לתמונה המקורית */
+
 .sliderControl {
     position: absolute;
     z-index: 2;
-    top: 78.5%;
-    width: 8.2%;
-    height: 13%;
+    top: 34.7%;
+    width: 6%;
+    height: 43.6%;
     padding: 0;
     border: 0;
-    border-radius: 0.4rem;
     background: transparent;
     cursor: pointer;
     touch-action: manipulation;
 }
 
-.first { left: 9%; }
-.second { left: 47.3%; }
-.third { left: 66%; }
+.first {
+    left: 10.4%;
+}
+
+.second {
+    left: 29.2%;
+}
+
+.third {
+    left: 47.8%;
+}
 
 .sliderControl:disabled {
     cursor: default;
-}
-
-.sliderHandle {
-    position: absolute;
-    z-index: 2;
-    left: 20%;
-    right: 20%;
-    top: 35%;
-    height: 35%;
-    border-radius: 0.16rem;
-    background: linear-gradient(90deg, #9f9da8, #eceaf2 30%, #aaa9b3 66%, #777781);
-    border: 0.05rem solid rgba(33, 27, 50, 0.6);
-    box-shadow: 0 0.12rem 0.25rem rgba(22, 20, 33, 0.48);
-    opacity: 0.9;
-    transition: transform 0.45s ease, box-shadow 0.25s ease;
-}
-
-.sliderActivated .sliderHandle {
-    transform: translateY(-95%);
-    box-shadow: 0 0.15rem 0.35rem #875ab6;
-}
-
-.sliderGlowing::before {
-    content: "";
-    position: absolute;
-    inset: 12% 3%;
-    border: 0.16rem solid #a377ea;
-    border-radius: 0.4rem;
-    background: rgba(167, 112, 242, 0.23);
-    box-shadow: 0 0 0.8rem #965bd8, 0 0 1.4rem rgba(150, 91, 216, 0.5);
-    animation: sliderPulse 1.5s ease-in-out infinite;
-    pointer-events: none;
-}
-
-.sliderSelected::after {
-    content: "✓";
-    position: absolute;
-    right: -20%;
-    top: -5%;
-    color: #efffe8;
-    background: #64af56;
-    border-radius: 50%;
-    font-size: clamp(0.65rem, 1vw, 0.9rem);
-    line-height: 1;
-    padding: 0.1rem;
-    pointer-events: none;
+    opacity: 1;
 }
 
 .sliderControl:focus-visible {
     outline: 0.16rem solid #087393;
     outline-offset: 0.1rem;
+    border-radius: 0.4rem;
 }
 
-@keyframes sliderPulse {
-    0%, 100% { opacity: 0.45; transform: scale(0.96); }
-    50% { opacity: 1; transform: scale(1.08); }
+/* הידית המקורית שנחתכה מתוך תמונת המיקסר */
+
+.sliderHandle {
+    position: absolute;
+    z-index: 2;
+
+    display: block;
+    width: 100%;
+    height: auto;
+
+    left: 0;
+    bottom: 2%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0.06rem 0.08rem rgba(0, 0, 0, 0.35));
+
+    transform: translateY(0);
+    transform-origin: center;
+
+    transition:
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.3s ease;
+
+    pointer-events: none;
+    will-change: transform;
 }
+
+/* הידית הפעילה עולה לאורך המסילה */
+
+.sliderActivated .sliderHandle {
+    transform: translateY(-310%);
+
+    filter:
+        drop-shadow(0 0.06rem 0.15rem rgba(0, 0, 0, 0.45));
+}
+
+/* זוהר צהוב על הידית בלבד */
+
+.sliderGlowing .sliderHandle {
+    animation: yellowHandlePulse 1.3s ease-in-out infinite;
+}
+
+/*
+   אין זוהר על המסילה כולה.
+   מבטלים גם את ה-pseudo element הישן.
+*/
+
+.sliderGlowing::before {
+    content: none;
+}
+
+/*
+   האנימציה משתמשת ב-scale העצמאי של CSS,
+   כדי שלא תדרוס את transform: translateY()
+   שאחראי לתנועת הידית.
+*/
+
+@keyframes yellowHandlePulse {
+
+    0%,
+    100% {
+        scale: 1;
+
+        filter:
+            drop-shadow(0 0 0.2rem #fff5a8) drop-shadow(0 0 0.4rem #ffd84d) drop-shadow(0 0 0.7rem rgba(255, 208, 0, 0.55));
+    }
+
+    50% {
+        scale: 1.16;
+
+        filter:
+            drop-shadow(0 0 0.4rem #fff6a0) drop-shadow(0 0 0.85rem #ffdd00) drop-shadow(0 0 1.3rem rgba(255, 213, 0, 0.95));
+    }
+}
+
+/* סימון שהידית כבר נלחצה */
+
+.visitedIndicator {
+    position: absolute;
+    z-index: 4;
+
+    right: -30%;
+    bottom: -8%;
+
+    display: grid;
+    place-items: center;
+
+    width: clamp(0.7rem, 1.4vw, 1.1rem);
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    background: #64af56;
+    color: #ffffff;
+
+    font-size: clamp(0.6rem, 0.9vw, 0.85rem);
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+/* אנימציית תיבת ההסבר */
 
 @keyframes infoAppear {
-    from { opacity: 0; transform: translateX(-0.7rem); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-0.7rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
+
+/* התאמה למסכים נמוכים */
 
 @media (max-height: 730px) {
-    .mixer { height: min(100%, 56vh); }
-    .infoBox { min-height: 7rem; padding: 0.8rem; }
-    .infoBox p { font-size: clamp(0.8rem, 1.1vw, 1.1rem); line-height: 1.4; }
+    .mixer {
+        height: min(100%, 56vh);
+    }
+
+    .infoBox {
+        min-height: 7rem;
+        padding: 0.8rem;
+    }
+
+    .infoBox p {
+        font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+        line-height: 1.4;
+    }
 }
+
+/* התאמה למסכים צרים */
 
 @media (max-width: 800px) {
-    .stageExpanded { gap: 0.7rem; }
-    .infoBox { padding: 0.7rem; }
-    .infoBox p { font-size: clamp(0.75rem, 1.5vw, 1rem); }
+    .stageExpanded {
+        gap: 0.7rem;
+    }
+
+    .infoBox {
+        padding: 0.7rem;
+    }
+
+    .infoBox p {
+        font-size: clamp(0.75rem, 1.5vw, 1rem);
+    }
 }
 
+/* נגישות */
+
 @media (prefers-reduced-motion: reduce) {
-    .stage, .sliderHandle { transition: none; }
-    .sliderGlowing::before, .infoBox { animation: none; }
+
+    .stage,
+    .sliderHandle {
+        transition: none;
+    }
+
+    .sliderGlowing .sliderHandle,
+    .infoBox {
+        animation: none;
+    }
+}
+
+.restoredControl .sliderHandle {
+    transition: none;
 }

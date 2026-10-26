@@ -1,0 +1,181 @@
+.page {
+    color: #2e5675;
+}
+
+.instructions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    gap: clamp(0.3rem, 0.6vw, 0.65rem);
+    margin: 0;
+
+    color: #087393;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+    line-height: 1.35;
+    text-align: center;
+}
+
+.cursor {
+    width: clamp(0.8rem, 1.3vw, 1.7rem);
+    height: clamp(0.8rem, 1.3vw, 1.7rem);
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    padding:
+        clamp(0.4rem, 1vh, 1rem) clamp(1rem, 5vw, 5rem);
+
+    box-sizing: border-box;
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: min(100%, 72rem);
+    max-height: 100%;
+    min-height: 0;
+
+    gap: clamp(0.35rem, 1.2vh, 0.9rem);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 0.4rem;
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a5c5db transparent;
+}
+
+/* כל מספר והמלבן שלו באותה שורה */
+
+.itemRow {
+    display: grid;
+    grid-template-columns:
+        clamp(3rem, 5vw, 4.2rem) minmax(0, 1fr);
+
+    align-items: center;
+    column-gap: clamp(0.3rem, 0.8vw, 0.8rem);
+
+    direction: rtl;
+    width: 100%;
+    min-height: clamp(3.6rem, 9vh, 5.1rem);
+
+    flex: 0 0 auto;
+}
+
+/* המספרים נשארים במקומם בכל מצב */
+
+.numberButton {
+    display: grid;
+    place-items: center;
+
+    width: clamp(3rem, 5vw, 4.2rem);
+    aspect-ratio: 1;
+
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+
+    background: #82afd3;
+    color: white;
+
+    font: inherit;
+    font-size: clamp(1.7rem, 3vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1;
+
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    position: relative;
+    z-index: 2;
+}
+
+.numberButton:hover {
+    transform: scale(1.07);
+    background: #6e9fc5;
+}
+
+.numberButton:focus-visible {
+    outline: 0.2rem solid #087393;
+    outline-offset: 0.2rem;
+}
+
+.revealed .numberButton {
+    background: #7faacb;
+}
+
+/* אזור שמור למלבן, גם כשהוא עדיין לא מוצג */
+
+.textSlot {
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+/* מלבן המידע הלבן */
+
+.textCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: clamp(3.2rem, 8vh, 4.7rem);
+
+    padding:
+        clamp(0.4rem, 0.9vh, 0.8rem) clamp(0.7rem, 1.5vw, 1.5rem);
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border-radius: clamp(0.35rem, 0.6vw, 0.6rem);
+
+    color: #285976;
+
+    animation: slideInFromRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.textCard p {
+    margin: 0;
+
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    line-height: 1.4;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* המלבן נשלף מכיוון המספר */
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(3.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

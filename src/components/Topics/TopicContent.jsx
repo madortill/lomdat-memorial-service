@@ -7,6 +7,9 @@ import RepresentativesFlipCards from "./MemorialProcess/RepresentativesFlipCards
 import TechnicalRepresentatives from "./TechnicalDetails/TechnicalRepresentatives";
 import TransportationCoordination from "./TechnicalDetails/TransportationCoordination";
 import AmplificationSystem from "./TechnicalDetails/AmplificationSystem";
+import MemorialHours from "./TechnicalDetails/MemorialHours";
+import CasualtyOfficerHighlights from "./CasualtyOfficerGuidelines/CasualtyOfficerHighlights";
+import CasualtyOfficerRole from "./CasualtyOfficerGuidelines/CasualtyOfficerRole";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -60,6 +63,22 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
 
     if (topic.id === "technicalDetails" && pageIndex === 2) {
         return <AmplificationSystem onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "technicalDetails" && pageIndex === 3) {
+        return (
+            <MemorialHours
+                onPageReady={onPageReady}
+            />
+        );
+    }
+
+    if (topic.id === "injuredRelatives" && pageIndex === 0) {
+        return <CasualtyOfficerHighlights onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "injuredRelatives" && pageIndex === 1) {
+        return <CasualtyOfficerRole onPageReady={onPageReady} />;
     }
 
     return (

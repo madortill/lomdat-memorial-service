@@ -4,6 +4,7 @@ import TopicLayout from "../TopicLayout/TopicLayout";
 import styles from "./TransportationCoordination.module.css";
 
 import busIcon from "../../../assets/img/bus.svg";
+import iconCursor from "../../../assets/img/iconCursor.svg";
 
 const STORAGE_KEY = "technical-transportation-visited";
 
@@ -49,9 +50,7 @@ const transportationSteps = [
         content: (
             <>
                 רק במידה ועולות בעיות בהזמנת ההסעות,
-                קצין הנפגעים ישמש{" "}
-                <strong>״גורם מגשר״</strong>
-                {" "}בין משהב״ט לבין המשפחה.
+                קצין הנפגעים ישמש <strong>״גורם מגשר״</strong> בין משהב״ט לבין המשפחה.
             </>
         )
     },
@@ -140,6 +139,16 @@ const TransportationCoordination = ({ onPageReady }) => {
         <TopicLayout
             title="פרטים טכניים - הסעות"
             className={styles.page}
+            headerContent={
+                <p className={styles.instructions}>
+                    <img
+                        src={iconCursor}
+                        alt=""
+                        className={styles.cursor}
+                    />
+                    לחצו על הרכבים למטה כדי ללמוד עוד
+                </p>
+            }
         >
             <section
                 className={styles.stage}

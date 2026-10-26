@@ -18,6 +18,27 @@
     box-sizing: border-box;
 }
 
+.instructions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    gap: clamp(0.3rem, 0.6vw, 0.65rem);
+    margin: 0;
+
+    color: #087393;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+    line-height: 1.35;
+    text-align: center;
+}
+
+.cursor {
+    width: clamp(0.8rem, 1.3vw, 1.7rem);
+    height: clamp(0.8rem, 1.3vw, 1.7rem);
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 .stepsList {
     display: flex;
     flex-direction: column;

@@ -1,10 +1,14 @@
+
 import { useEffect, useState } from "react";
 import TopicLayout from "../TopicLayout/TopicLayout";
 import styles from "./AmplificationSystem.module.css";
-import mixerImage from "../../../assets/img/amplificationSystem.svg";
+
+import mixerBase from "../../../assets/img/amplificationMixerBase.png";
+import faderImage from "../../../assets/img/amplificationFader.png";
 import iconCursor from "../../../assets/img/iconCursor.svg";
 
 const STORAGE_KEY = "technical-amplification-visited";
+const ACTIVE_STORAGE_KEY = "technical-amplification-active";
 
 const controls = [
     {
@@ -13,8 +17,11 @@ const controls = [
         position: "first",
         content: (
             <>
-                <strong>בשנת האבל הראשונה, תינתן למשפחה זכאות לקבלת מערכת הגברה מספק מורשה של משהב״ט</strong>,
-                {" "}בדומה למענה אשר ניתן לטובת הלוויה ואזכרת השבעה.
+                <strong>
+                    בשנת האבל הראשונה, תינתן למשפחה זכאות לקבלת
+                    מערכת הגברה מספק מורשה של משהב״ט
+                </strong>
+                , בדומה למענה אשר ניתן לטובת הלוויה ואזכרת השבעה.
             </>
         )
     },
@@ -24,8 +31,12 @@ const controls = [
         position: "second",
         content: (
             <>
-                <strong>החל מהשנה השנייה</strong> יתאפשר למשפחה להשאיל מערכת הגברה ממשרד הביטחון,
-                {" "}<strong>לפרק זמן סביר של 48 ש׳</strong>. בדומה לנושא ההסעות לאזכרה, השאלת המערכת והאחריות לה הינם של המשפחה באופן בלעדי.
+                <strong>החל מהשנה השנייה</strong>
+                {" "}יתאפשר למשפחה להשאיל מערכת הגברה ממשרד הביטחון,
+                {" "}
+                <strong>לפרק זמן סביר של 48 ש׳</strong>.
+                {" "}בדומה לנושא ההסעות לאזכרה, השאלת המערכת
+                והאחריות לה הינם של המשפחה באופן בלעדי.
             </>
         )
     },
@@ -35,8 +46,15 @@ const controls = [
         position: "third",
         content: (
             <>
-                <strong>תתקיים פריסה גאוגרפית של מוקדים מהם ניתן להשאיל מערכות הגברה.</strong>
-                {" "}המוקדים אשר נקבעו הם אלה אשר יכולים לספק מענה הולם לצורך, בבחינת צוות הפעלה קבוע, עובדי משהב״ט. כמו כן הובהר כי יישמר היצע של מערכות בכל מוקד, כך שיתאפשר לתת מענה למספר אזכרות במקביל.
+                <strong>
+                    תתקיים פריסה גאוגרפית של מוקדים מהם
+                    ניתן להשאיל מערכות הגברה.
+                </strong>
+                {" "}המוקדים אשר נקבעו הם אלה אשר יכולים לספק
+                מענה הולם לצורך, בבחינת צוות הפעלה קבוע,
+                עובדי משהב״ט. כמו כן הובהר כי יישמר היצע
+                של מערכות בכל מוקד, כך שיתאפשר לתת מענה
+                למספר אזכרות במקביל.
             </>
         )
     }
@@ -44,39 +62,93 @@ const controls = [
 
 const getSavedVisited = () => {
     try {
-        const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "[]");
-        return Array.isArray(saved)
-            ? [...new Set(saved.filter(id => controls.some(control => control.id === id)))]
+        const stored = JSON.parse(
+            sessionStorage.getItem(STORAGE_KEY) || "[]"
+        );
+
+        return Array.isArray(stored)
+            ? [
+                ...new Set(
+                    stored.filter(id =>
+                        controls.some(control => control.id === id)
+                    )
+                )
+            ]
             : [];
     } catch {
         return [];
     }
 };
 
+const getSavedActiveId = () => {
+    try {
+        const savedId = sessionStorage.getItem(ACTIVE_STORAGE_KEY);
+        const savedVisited = getSavedVisited();
+
+        return savedVisited.includes(savedId)
+            ? savedId
+            : null;
+    } catch {
+        return null;
+    }
+};
+
 const AmplificationSystem = ({ onPageReady }) => {
     const [visited, setVisited] = useState(getSavedVisited);
-    const [activeId, setActiveId] = useState(null);
-    const allVisited = controls.every(control => visited.includes(control.id));
-    const nextIndex = controls.findIndex(control => !visited.includes(control.id));
-    const activeControl = controls.find(control => control.id === activeId);
+    const [activeId, setActiveId] = useState(getSavedActiveId);
+
+    // false בעת שחזור, true לאחר לחיצה חדשה של המשתמש
+    const [hasInteracted, setHasInteracted] = useState(false);
+
+    const allVisited = controls.every(control =>
+        visited.includes(control.id)
+    );
+
+    const nextIndex = controls.findIndex(control =>
+        !visited.includes(control.id)
+    );
+
+    const activeControl = controls.find(
+        control => control.id === activeId
+    );
 
     useEffect(() => {
-        if (allVisited) onPageReady?.();
+        if (allVisited) {
+            onPageReady?.();
+        }
     }, [allVisited, onPageReady]);
 
     const chooseControl = (control, index) => {
         const wasVisited = visited.includes(control.id);
-        if (!wasVisited && index !== nextIndex) return;
 
+        if (!wasVisited && index !== nextIndex) {
+            return;
+        }
+
+        // לחיצה חדשה - מאפשרים את אנימציות הסליידרים
+        setHasInteracted(true);
         setActiveId(control.id);
+
+        const updatedVisited = wasVisited
+            ? visited
+            : [...visited, control.id];
+
         if (!wasVisited) {
-            const updated = [...visited, control.id];
-            setVisited(updated);
-            try {
-                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-            } catch {
-                // Continue the activity even if storage is unavailable.
-            }
+            setVisited(updatedVisited);
+        }
+
+        try {
+            sessionStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(updatedVisited)
+            );
+
+            sessionStorage.setItem(
+                ACTIVE_STORAGE_KEY,
+                control.id
+            );
+        } catch {
+            // ממשיכים גם כאשר sessionStorage אינו זמין
         }
     };
 
@@ -86,15 +158,28 @@ const AmplificationSystem = ({ onPageReady }) => {
             className={styles.page}
             headerContent={
                 <p className={styles.instructions}>
-                    <img src={iconCursor} alt="" className={styles.cursor} />
+                    <img
+                        src={iconCursor}
+                        alt=""
+                        className={styles.cursor}
+                    />
                     לחצו על הכפתורים הזוהרים כדי ללמוד עוד
                 </p>
             }
         >
-            <section className={`${styles.stage} ${activeControl ? styles.stageExpanded : ""}`} aria-label="מערכת הגברה אינטראקטיבית">
-                <div className={styles.infoColumn} aria-live="polite">
+            <section
+                className={[
+                    styles.stage,
+                    activeControl ? styles.stageExpanded : ""
+                ].filter(Boolean).join(" ")}
+                aria-label="מערכת הגברה אינטראקטיבית"
+            >
+                <div
+                    className={styles.infoColumn}
+                    aria-live="polite"
+                >
                     {activeControl && (
-                        <div key={activeControl.id} className={styles.infoBox}>
+                        <div className={styles.infoBox}>
                             <p>{activeControl.content}</p>
                         </div>
                     )}
@@ -102,10 +187,19 @@ const AmplificationSystem = ({ onPageReady }) => {
 
                 <div className={styles.mixerColumn}>
                     <div className={styles.mixer}>
-                        <img src={mixerImage} alt="מיקסר מערכת הגברה עם שלושה כפתורים אינטראקטיביים" className={styles.mixerImage} draggable="false" />
+                        <img
+                            src={mixerBase}
+                            className={styles.mixerImage}
+                            alt="מערכת הגברה עם שלושה סליידרים נעים"
+                            draggable={false}
+                        />
+
                         {controls.map((control, index) => {
                             const isVisited = visited.includes(control.id);
-                            const isAvailable = isVisited || nextIndex === index;
+                            const isAvailable =
+                                isVisited || nextIndex === index;
+                            const isActive = activeId === control.id;
+
                             return (
                                 <button
                                     key={control.id}
@@ -113,17 +207,37 @@ const AmplificationSystem = ({ onPageReady }) => {
                                     className={[
                                         styles.sliderControl,
                                         styles[control.position],
-                                        isVisited ? styles.sliderActivated : "",
-                                        nextIndex === index && !isVisited ? styles.sliderGlowing : "",
-                                        activeId === control.id ? styles.sliderSelected : ""
+                                        isActive ? styles.sliderActivated : "",
+                                        nextIndex === index && !isVisited
+                                            ? styles.sliderGlowing
+                                            : "",
+                                        !hasInteracted
+                                            ? styles.restoredControl
+                                            : ""
                                     ].filter(Boolean).join(" ")}
-                                    onClick={() => chooseControl(control, index)}
+                                    onClick={() =>
+                                        chooseControl(control, index)
+                                    }
                                     disabled={!isAvailable}
                                     aria-label={`${control.label}${isVisited ? ", נצפה" : ""}`}
-                                    aria-pressed={activeId === control.id}
+                                    aria-pressed={isActive}
                                     title={control.label}
                                 >
-                                    <span className={styles.sliderHandle} aria-hidden="true" />
+                                    <img
+                                        src={faderImage}
+                                        className={styles.sliderHandle}
+                                        alt=""
+                                        draggable={false}
+                                    />
+
+                                    {isVisited && (
+                                        <span
+                                            className={styles.visitedIndicator}
+                                            aria-hidden="true"
+                                        >
+                                            ✓
+                                        </span>
+                                    )}
                                 </button>
                             );
                         })}

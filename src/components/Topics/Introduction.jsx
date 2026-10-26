@@ -101,7 +101,7 @@ export default function Introduction({ onPageComplete }) {
             <div className={styles.main}>
                 <div className={styles.carouselGroup}>
                     <h2 className={styles.subheading}>
-                        דגשים מרכזיים להובלת התהליך:
+                        דגשים מרכזיים להובלת התהליך (לחצו על הכרטיסיות למטה כדי ללמוד עוד):
                     </h2>
 
                     <div

@@ -1,0 +1,355 @@
+.page {
+    color: #381076;
+}
+
+.stage {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 0;
+
+    padding:
+        clamp(0.6rem, 1.5vh, 1.5rem) clamp(1rem, 4vw, 4rem);
+
+    box-sizing: border-box;
+}
+
+.stepsList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: min(100%, 72rem);
+    max-height: 100%;
+
+    gap: clamp(0.55rem, 1.8vh, 1.3rem);
+    padding: 0.3rem;
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b59bf0 transparent;
+}
+
+.step {
+    --bus-size: clamp(2.4rem, 3.8vw, 4rem);
+    --step-padding: clamp(0.45rem, 1vw, 0.9rem);
+    --bus-right: 0.45rem;
+    --bus-left: calc(100% - var(--bus-size) - 0.45rem);
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: clamp(3.6rem, 7.2vh, 5.5rem);
+
+    box-sizing: border-box;
+
+    padding:
+        var(--step-padding) calc(var(--bus-size) + 1rem);
+
+    border: 0.1rem solid #b59bf0;
+    border-radius: 0.5rem;
+
+    background: #fffdf7;
+    color: #381076;
+
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+
+    box-shadow:
+        0 0.2rem 0.25rem rgba(56, 16, 118, 0.15);
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.step:hover:not(:disabled) {
+    background: #fdf9ff;
+    border-color: #9864dd;
+
+    box-shadow:
+        0 0.2rem 0.65rem rgba(110, 48, 180, 0.17);
+}
+
+.step:focus-visible {
+    outline: 0.2rem solid #087393;
+    outline-offset: 0.2rem;
+}
+
+.step:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+/* כותרת הפס במצב הסגור */
+
+.stepTitle {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+    width: 100%;
+
+    font-family: "Yuval", "Ploni", sans-serif;
+    font-size: clamp(1rem, 1.45vw, 1.75rem);
+    line-height: 1.2;
+    color: #68419a;
+    font-weight: 700;
+
+    opacity: 1;
+
+    transition: opacity 0.2s ease;
+}
+
+/* הכותרת מוסתרת כשההסבר מוצג */
+
+.revealed .stepTitle,
+.opening .stepTitle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* במהלך הנסיעה חזרה הכותרת תופיע רק בסיום */
+
+.closing .stepTitle {
+    opacity: 0;
+}
+
+/* תוכן ההסבר */
+
+.stepContent {
+    position: absolute;
+    z-index: 1;
+
+    inset:
+        0 calc(var(--bus-size) + 1.1rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #381076;
+    font-size: clamp(0.75rem, 1.03vw, 1.2rem);
+    line-height: 1.4;
+    font-weight: 400;
+
+    text-align: center;
+    direction: rtl;
+
+    opacity: 0;
+    clip-path: inset(0 0 0 100%);
+
+    pointer-events: none;
+}
+
+.stepContent strong {
+    font-weight: 700;
+}
+
+/* האוטובוס */
+
+.busIcon {
+    position: absolute;
+    z-index: 3;
+
+    width: var(--bus-size);
+    height: var(--bus-size);
+
+    top: 50%;
+    right: var(--bus-right);
+
+    object-fit: contain;
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* מצב פתוח */
+
+.revealed {
+    border-color: #a788db;
+    background: #fffdf9;
+}
+
+.revealed .busIcon {
+    right: var(--bus-left);
+}
+
+.revealed .stepContent {
+    opacity: 1;
+    clip-path: inset(0);
+}
+
+/* נסיעה מימין לשמאל - פתיחה */
+
+.opening .busIcon {
+    animation: busDrive 1.15s ease-in-out forwards;
+}
+
+.opening .stepContent {
+    opacity: 1;
+    animation: writeText 1.15s linear forwards;
+}
+
+/* נסיעה משמאל לימין - סגירה */
+
+.closing .busIcon {
+    animation: busReturn 1.15s ease-in-out forwards;
+}
+
+.closing .stepContent {
+    opacity: 1;
+    animation: eraseText 1.15s linear forwards;
+}
+
+/* סימון השלמה שנשאר גם כשהפס סגור */
+
+.checkIcon {
+    position: absolute;
+    z-index: 4;
+
+    right: 0.6rem;
+    top: 50%;
+
+    display: grid;
+    place-items: center;
+
+    width: clamp(1.3rem, 1.8vw, 1.8rem);
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    background: #75bf61;
+    color: #fff;
+
+    font-family: "Ploni", sans-serif;
+    font-size: clamp(0.85rem, 1vw, 1.1rem);
+    font-weight: 700;
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    animation: checkAppear 0.25s ease both;
+}
+
+/* אנימציות */
+
+@keyframes busDrive {
+    from {
+        right: var(--bus-right);
+        transform: translateY(-50%);
+    }
+
+    to {
+        right: var(--bus-left);
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes busReturn {
+    from {
+        right: var(--bus-left);
+        transform: translateY(-50%);
+    }
+
+    to {
+        right: var(--bus-right);
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes writeText {
+    from {
+        clip-path: inset(0 0 0 100%);
+    }
+
+    to {
+        clip-path: inset(0);
+    }
+}
+
+@keyframes eraseText {
+    from {
+        clip-path: inset(0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes checkAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* התאמה למסכים נמוכים */
+
+@media (max-height: 700px) {
+    .stepsList {
+        gap: clamp(0.3rem, 1vh, 0.7rem);
+    }
+
+    .step {
+        min-height: clamp(3rem, 8vh, 4rem);
+    }
+
+    .stepContent {
+        font-size: clamp(0.7rem, 0.95vw, 1rem);
+        line-height: 1.25;
+    }
+
+    .stepTitle {
+        font-size: clamp(0.9rem, 1.2vw, 1.4rem);
+    }
+}
+
+/* התאמה למסכים צרים */
+
+@media (max-width: 800px) {
+    .stage {
+        padding-inline: 0.6rem;
+    }
+
+    .step {
+        --bus-size: clamp(2rem, 5vw, 3rem);
+        min-height: 4.4rem;
+    }
+
+    .stepContent {
+        font-size: clamp(0.7rem, 1.6vw, 0.95rem);
+    }
+}
+
+/* נגישות - הפחתת תנועה */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .opening .busIcon,
+    .opening .stepContent,
+    .closing .busIcon,
+    .closing .stepContent {
+        animation-duration: 0.01ms;
+    }
+
+    .step,
+    .stepTitle {
+        transition: none;
+    }
+}

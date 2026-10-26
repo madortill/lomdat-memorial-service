@@ -11,7 +11,7 @@ const topics = [
     { id: "introduction", title: "מבוא", color: "cream", popupColor: "#FFF1D5", type: "topic" },
     { id: "memorialProcess", title: "תהליך תיאום אזכרה", color: "green", popupColor: "#E2EAD2", type: "topic" },
     { id: "exercise1", title: "תרגול 1", popupColor: "#F1DDC4", type: "exercise" },
-    { id: "technicalDetails", title: "פרטים טכניים", color: "purple", popupColor: "#DCD4ED", type: "topic" },
+    { id: "technicalDetails", title: "פרטים טכניים", color: "purple", popupColor: "#F6F2FF", type: "topic" },
     { id: "injuredRelatives", title: "דגשים לקצין הנפגעים", color: "blue", popupColor: "#D7ECF8", type: "topic" },
     { id: "exercise2", title: "תרגול 2", popupColor: "#A7D6D1", type: "exercise" },
     { id: "militaryMemorials", title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים", color: "pink", popupColor: "#F9DFD7", type: "topic" },

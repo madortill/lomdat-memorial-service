@@ -4,6 +4,9 @@ import Introduction from "./Introduction";
 import MemorialProcess from "./MemorialProcess/MemorialProcess";
 import ChazzanCoordination from "./MemorialProcess/ChazzanCoordination";
 import RepresentativesFlipCards from "./MemorialProcess/RepresentativesFlipCards";
+import TechnicalRepresentatives from "./TechnicalDetails/TechnicalRepresentatives";
+import TransportationCoordination from "./TechnicalDetails/TransportationCoordination";
+import AmplificationSystem from "./TechnicalDetails/AmplificationSystem";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -26,6 +29,14 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
         );
     }
 
+    if (topic.id === "technicalDetails" && pageIndex === 0) {
+        return (
+            <TechnicalRepresentatives
+                onPageReady={onPageReady}
+            />
+        );
+    }
+
     if (topic.id === "memorialProcess") {
         return (
             <TopicLayout title="תהליך תיאום אזכרה">
@@ -37,6 +48,18 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
                 </div>
             </TopicLayout>
         );
+    }
+
+    if (topic.id === "technicalDetails" && pageIndex === 1) {
+        return (
+            <TransportationCoordination
+                onPageReady={onPageReady}
+            />
+        );
+    }
+
+    if (topic.id === "technicalDetails" && pageIndex === 2) {
+        return <AmplificationSystem onPageReady={onPageReady} />;
     }
 
     return (

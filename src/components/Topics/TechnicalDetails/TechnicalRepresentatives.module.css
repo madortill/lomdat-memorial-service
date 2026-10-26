@@ -1,0 +1,237 @@
+.page {
+    color: #381076;
+}
+
+.instructions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.3rem, 0.6vw, 0.65rem);
+    margin: 0;
+    color: #087393;
+    font-size: clamp(0.9rem, 1.1vw, 1.3rem);
+    line-height: 1.35;
+    text-align: center;
+    flex-direction: row-reverse;
+}
+
+.cursor {
+    width: clamp(1rem, 1.6vw, 1.7rem);
+    height: clamp(1rem, 1.6vw, 1.7rem);
+    object-fit: contain;
+}
+
+.stage {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+
+    width: min(100%, 65rem);
+    height: 100%;
+    min-height: 0;
+
+    margin-inline: auto;
+    padding:
+        clamp(0.5rem, 1.5vh, 1.3rem) clamp(0.5rem, 2vw, 2rem) clamp(1rem, 3vh, 2.5rem);
+
+    box-sizing: border-box;
+}
+
+.bubbleArea {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    padding: clamp(0.4rem, 1vh, 1rem) 0;
+}
+
+.bubbleWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.bubblePointer {
+    position: absolute;
+    z-index: 2;
+
+    /* תמיד צמוד לתחתית בועת הדיבור */
+    bottom: -0.65rem;
+
+    /* המיקום האופקי לפי הדמות הפעילה */
+    right: calc((var(--active-person) + 0.5) * 100% / 3);
+
+    width: 1.3rem;
+    height: 1.3rem;
+
+    background: #fffdf7;
+    border-right: 0.1rem solid #b59bf0;
+    border-bottom: 0.1rem solid #b59bf0;
+
+    transform: translateX(50%) rotate(45deg);
+    transition: right 0.25s ease;
+}
+
+.speechBubble {
+    position: relative;
+
+    width: min(100%, 48rem);
+    max-height: 100%;
+
+    padding:
+        clamp(1.1rem, 2.2vw, 2.2rem) clamp(1rem, 2.5vw, 2.6rem);
+
+    border: 0.1rem solid #b59bf0;
+    border-radius: clamp(0.5rem, 0.8vw, 1rem);
+
+    box-sizing: border-box;
+    background: #fffdf7;
+    color: #381076;
+
+    overflow: visible;
+
+    animation: bubbleAppear 0.35s ease both;
+
+    height: clamp(10rem, 24vh, 15rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* הזנב ממוקם מתחת לתיבה, ולכן מוצג מחוץ לתוכן */
+.speechBubble {
+    overflow: visible;
+}
+
+.speechBubble p {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.25vw, 1.45rem);
+    line-height: 1.55;
+    text-align: center;
+}
+
+.speechBubble strong {
+    font-weight: 700;
+}
+
+.peopleRow {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    justify-items: center;
+
+    gap: clamp(0rem, 0vw, 4rem);
+    width: 100%;
+    direction: rtl;
+}
+
+.personButton {
+    --person-fill: #f6f0ff;
+
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+    max-width: clamp(6rem, 8vw, 12rem);
+    aspect-ratio: 1;
+
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    transition: transform 0.25s ease;
+}
+
+.personShape {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background: var(--person-fill);
+
+    -webkit-mask-image: var(--person-mask);
+    mask-image: var(--person-mask);
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    filter: drop-shadow(0 0 0.6rem rgba(146, 73, 255, 0.6));
+
+    transition:
+        background-color 0.3s ease,
+        filter 0.3s ease,
+        transform 0.3s ease;
+}
+
+.personButton.visited {
+    --person-fill: #381076;
+}
+
+.personButton.active .personShape {
+    filter: drop-shadow(0 0 0.8rem rgba(151, 82, 255, 0.95));
+    transform: scale(1.06);
+}
+
+.personButton:not(:disabled):hover {
+    transform: translateY(-0.3rem);
+}
+
+.personButton:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.personButton.glowing::before {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+
+    background: rgba(161, 101, 255, 0.15);
+    filter: blur(1rem);
+
+    animation: purpleGlow 1.6s ease-in-out infinite;
+}
+
+.personButton:focus-visible {
+    outline: 0.2rem solid #087393;
+    outline-offset: 0.3rem;
+    border-radius: 0.6rem;
+}
+
+@keyframes purpleGlow {
+
+    0%,
+    100% {
+        opacity: 0.45;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes bubbleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

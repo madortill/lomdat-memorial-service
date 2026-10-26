@@ -1,7 +1,7 @@
 export const pageCounts = {
     introduction: 1,
     memorialProcess: 3,
-    technicalDetails: 1,
+    technicalDetails: 3,
     injuredRelatives: 1,
     militaryMemorials: 1,
     casualtyGuidelines: 1,

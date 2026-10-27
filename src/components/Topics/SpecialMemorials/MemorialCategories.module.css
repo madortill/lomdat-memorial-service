@@ -1,0 +1,225 @@
+.page {
+    color: #80502c;
+}
+
+.stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    width: min(100%, 72rem);
+    height: 100%;
+    min-height: 0;
+
+    margin-inline: auto;
+
+    gap: clamp(0.8rem, 2.4vh, 1.8rem);
+
+    padding:
+        clamp(0.5rem, 1.5vh, 1.5rem) clamp(0.8rem, 3vw, 3rem);
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #e6af7a transparent;
+}
+
+/* המלבן הגדול - אזכרות ספ"כ */
+
+.spacSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.3rem, 0.8vh, 0.7rem);
+
+    padding:
+        clamp(0.7rem, 1.6vh, 1.4rem) clamp(0.8rem, 2vw, 2rem);
+
+    background: #ffd0a0;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    box-sizing: border-box;
+}
+
+.sectionTitle {
+    margin: 0;
+
+    color: #80502c;
+
+    font-size: clamp(1rem, 1.5vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.3;
+
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+}
+
+.sectionSubtitle {
+    margin: 0;
+
+    color: #80502c;
+
+    font-size: clamp(0.85rem, 1.1vw, 1.2rem);
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* שתי קבוצות הדרגות */
+
+.rankGroups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    width: min(100%, 49rem);
+    min-width: 0;
+
+    gap: clamp(0.75rem, 2.5vw, 2.6rem);
+    direction: rtl;
+}
+
+.rankGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 0;
+    gap: clamp(0.3rem, 0.8vh, 0.7rem);
+}
+
+.rankCard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+
+    width: 100%;
+    min-height: clamp(5.2rem, 13vh, 8.5rem);
+
+    gap: clamp(0.3rem, 0.8vw, 1rem);
+
+    padding: clamp(0.5rem, 1.1vw, 1.15rem);
+
+    background: #fff0e3;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    box-sizing: border-box;
+}
+
+.rankItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    gap: clamp(0.25rem, 0.7vw, 0.75rem);
+}
+
+.rankImage {
+    display: block;
+
+    width: clamp(1.7rem, 3.6vw, 3.8rem);
+    height: clamp(2.2rem, 5vw, 4.8rem);
+
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.rankText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+
+    color: #80502c;
+    text-align: center;
+}
+
+.rankName {
+    font-size: clamp(0.85rem, 1.25vw, 1.4rem);
+    line-height: 1.25;
+}
+
+.rankFullName {
+    font-family: "Yuval", "Ploni", sans-serif;
+
+    font-size: clamp(0.8rem, 1.15vw, 1.3rem);
+    line-height: 1.2;
+}
+
+.rankDescription {
+    margin: 0;
+
+    color: #80502c;
+
+    font-size: clamp(0.82rem, 1.05vw, 1.2rem);
+    line-height: 1.35;
+    text-align: center;
+}
+
+/* גיבורי ישראל ומקורבים */
+
+.otherCategories {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.75rem, 2vw, 1.7rem);
+    direction: rtl;
+}
+
+.categoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: clamp(8rem, 23vh, 13rem);
+
+    gap: clamp(0.8rem, 2vh, 1.6rem);
+
+    padding:
+        clamp(0.9rem, 2vh, 1.8rem) clamp(1rem, 2.2vw, 2rem);
+
+    background: #ffd0a0;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    box-sizing: border-box;
+}
+
+.categoryTitle {
+    margin: 0;
+
+    color: #80502c;
+
+    font-size: clamp(1.05rem, 1.5vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.3;
+
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+}
+
+.categoryDescription {
+    margin: 0;
+
+    color: #80502c;
+
+    font-size: clamp(0.88rem, 1.15vw, 1.25rem);
+    line-height: 1.55;
+    text-align: center;
+}

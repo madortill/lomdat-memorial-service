@@ -14,7 +14,7 @@ const topics = [
     { id: "technicalDetails", title: "פרטים טכניים", color: "purple", popupColor: "#F6F2FF", type: "topic" },
     { id: "injuredRelatives", title: "דגשים לקצין הנפגעים", color: "blue", popupColor: "#D7ECF8", type: "topic" },
     { id: "exercise2", title: "תרגול 2", popupColor: "#A7D6D1", type: "exercise" },
-    { id: "militaryMemorials", title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים", color: "pink", popupColor: "#F9DFD7", type: "topic" },
+    { id: "militaryMemorials", title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים", color: "pink", popupColor: "#F9E6DC", type: "topic" },
     { id: "casualtyGuidelines", title: "חללי נצר אחרון", color: "yellow", popupColor: "#FFE59B", type: "topic" },
     { id: "exercise3", title: "תרגול 3", popupColor: "#D4C4A9", type: "exercise" }
 ];

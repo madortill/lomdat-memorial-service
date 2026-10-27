@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 
 import { preloadAssets } from "./utils/preloadAssets";
@@ -15,6 +15,8 @@ import tillLogo from "./assets/img/tillLogo.svg";
 
 function App() {
   const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const location = useLocation();
+  const isOpeningPage = location.pathname === "/";
 
   useEffect(() => {
     preloadAssets().then(() => {
@@ -33,13 +35,17 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app-logos">
-        <img src={bahad11Logo} alt="בהד 11" />
-        <img src={tillLogo} alt="מדור טיל" />
-      </div>
+      {!isOpeningPage && (
+        <>
+          <div className="app-logos">
+            <img src={bahad11Logo} alt="בהד 11" />
+            <img src={tillLogo} alt="מדור טיל" />
+          </div>
 
-      <img src={plant} alt="" className="app-plant" />
-      <img src={table} alt="" className="app-table" />
+          <img src={plant} alt="" className="app-plant" />
+          <img src={table} alt="" className="app-table" />
+        </>
+      )}
 
       <div className="app-content">
         <Routes>

@@ -5,7 +5,7 @@ export const exercisesData = {
             id: "e1-order",
             type: "ordering",
             title: "שאלה 1",
-            instruction: "סדרו את שלבי התיאום לפי סדרם",
+            instruction: "סדרו את שלבי תיאום האזכרה שלפניכם מהראשון (מספר 1) לאחרון (מספר 4)",
             items: [
                 { id: "confirm", text: "וידוא פרטי האזכרה עם המשפחה" },
                 { id: "report", text: "הוצאת דו״ח אזכרות" },

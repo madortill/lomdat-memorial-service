@@ -10,6 +10,7 @@ import AmplificationSystem from "./TechnicalDetails/AmplificationSystem";
 import MemorialHours from "./TechnicalDetails/MemorialHours";
 import CasualtyOfficerHighlights from "./CasualtyOfficerGuidelines/CasualtyOfficerHighlights";
 import CasualtyOfficerRole from "./CasualtyOfficerGuidelines/CasualtyOfficerRole";
+import MemorialCategories from "./SpecialMemorials/MemorialCategories";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -79,6 +80,10 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
 
     if (topic.id === "injuredRelatives" && pageIndex === 1) {
         return <CasualtyOfficerRole onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "militaryMemorials" && pageIndex === 0) {
+        return <MemorialCategories onPageReady={onPageReady} />;
     }
 
     return (

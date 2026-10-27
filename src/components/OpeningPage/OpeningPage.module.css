@@ -1,130 +1,357 @@
 .page {
     position: relative;
-    width: 100%;
+
+    width: 100vw;
     height: 100dvh;
-    background-color: transparent;
+
     overflow: hidden;
     isolation: isolate;
     direction: rtl;
+
+    background-color: #B49373;
+
+    display: grid;
+    place-items: center;
+
+    font-family: "Ploni", sans-serif;
 }
 
-.page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(35deg,
-            transparent 70%,
-            rgba(177, 207, 237, 0.2) 70%);
-    pointer-events: none;
+.page,
+.page * {
+    box-sizing: border-box;
 }
 
-.boardArea {
-    position: absolute;
-    top: 13%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(78vw, 112vh, 78rem);
-    aspect-ratio: 1.61;
-    z-index: 2;
-}
+/* משטח עיצוב אחיד */
 
-.corkBoard {
-    position: absolute;
-    inset: 0;
+.scene {
+    position: relative;
+
     width: 100%;
     height: 100%;
-    object-fit: fill;
-    display: block;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    container-type: inline-size;
+}
+
+/* משטח העץ */
+
+.woodTexture {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    pointer-events: none;
+    user-select: none;
+
+    opacity: 0.8;
+}
+
+/* מחברת פתוחה */
+
+.notebook {
+    position: absolute;
+    z-index: 1;
+
+    width: min(92vw, 155vh);
+    height: auto;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: contain;
+
     pointer-events: none;
     user-select: none;
 }
 
-.boardContent {
+/* העציץ והעיפרון */
+
+.plant {
     position: absolute;
-    inset: 6.5% 4% 6% 4%;
-    background-color: #fff5bee0;
+    z-index: 4;
+
+    width: 38%;
+    height: auto;
+    top: -45%;
+    left: -13%;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+.pencil {
+    position: absolute;
+    z-index: 5;
+
+    top: -2%;
+    left: 26%;
+    width: 20%;
+    height: auto;
+
+    transform: rotate(2deg);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* המדבקות */
+
+.tillSticker {
+    position: absolute;
+    z-index: 5;
+
+    width: 9%;
+    height: auto;
+
+    left: 20%;
+    top: 25%;
+
+    transform: rotate(-11deg);
+    filter: drop-shadow(0 0.35cqw 0.35cqw rgba(0, 0, 0, 0.15));
+}
+
+.bahadSticker {
+    position: absolute;
+    z-index: 5;
+
+    width: 10%;
+    height: auto;
+
+    right: 19%;
+    bottom: 22%;
+
+    transform: rotate(-10deg);
+    filter: drop-shadow(0 0.35cqw 0.35cqw rgba(0, 0, 0, 0.15));
+}
+
+/* הפתקית הכחולה */
+
+.note {
+    position: absolute;
+    z-index: 3;
+
+    left: 26%;
+    top: 10%;
+    width: 49%;
+    height: 85%;
+
+    filter: drop-shadow(0.7cqw 1cqw 0.4cqw rgba(0, 0, 0, 0.14));
+}
+
+.noteImage {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+/* כותרת על הפתקית */
+
+.title {
+    position: absolute;
+    z-index: 2;
+
+    top: 20%;
+    left: 13%;
+    width: 73%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-}
 
-.welcomeText {
-    color: #58320F;
-    font-family: "Ploni", sans-serif;
-    font-size: clamp(1.1rem, 1.65vw, 2.2rem);
+    margin: 0;
+
+    transform: rotate(-12deg);
+
+    color: #303238;
+    font-family: "PloniB", "Ploni", sans-serif;
+    font-size: clamp(1.4rem, 6.2cqw, 6rem);
     font-weight: 700;
+    line-height: 1.03;
     text-align: center;
-    margin: 0 0 0.5rem;
 }
 
-
-
-
-.title {
-    color: #58320F;
-    font-family: "Ploni", sans-serif;
-    font-size: clamp(2rem, 4.5vw, 6rem);
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: center;
-    margin: 0 0 clamp(1.5rem, 6vh, 4rem);
+.title span {
+    display: block;
 }
+
+/* כפתור תחילת הלומדה */
 
 .startBtn {
-    position: relative;
-    min-width: clamp(9rem, 16vw, 15rem);
-    min-height: clamp(2rem, 4.5vh, 3rem);
-    padding: 0.35rem 1.6rem;
-    border: none;
-    border-radius: 999rem;
-    background-color: #BF711D;
-    color: white;
-    font-family: "Ploni", sans-serif;
-    font-size: clamp(0.9rem, 1.15vw, 1.35rem);
-    font-weight: 600;
+    position: absolute;
+    z-index: 4;
+
+    left: 35%;
+    bottom: 15%;
+
+    width: 40%;
+    height: auto;
+    aspect-ratio: 371 / 155;
+
+    padding: 0;
+    border: 0;
+    background: transparent;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    z-index: 3;
+
+    transition:
+        transform 0.22s ease,
+        filter 0.22s ease;
+}
+
+.startBtn img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 .startBtn:hover {
-    transform: scale(1.06);
-    background-color: #A95C13;
+    transform: translateY(-0.35cqw) scale(1.045);
+    filter: drop-shadow(0 0.4cqw 0.3cqw rgba(24, 107, 116, 0.2));
 }
 
 .startBtn:active {
     transform: scale(0.97);
 }
 
-.buttonArrow {
-    font-size: 1.5em;
-    font-weight: 400;
-    line-height: 0.7;
+.startBtn:focus-visible,
+.aboutBtn:focus-visible {
+    outline: 0.25cqw solid #087393;
+    outline-offset: 0.4cqw;
+    border-radius: 0.4cqw;
 }
 
-.aboutNote {
+/* פתקית אודות */
+
+.aboutBtn {
     position: absolute;
-    bottom: 12%;
-    right: 7%;
-    width: clamp(4rem, 8vw, 7rem);
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: #DFE9C7;
-    color: #4D7774;
-    font-family: "Ploni", sans-serif;
-    font-size: clamp(0.85rem, 1.15vw, 1.25rem);
-    font-weight: 400;
-    transform: rotate(18deg);
-    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
-    z-index: 2;
+    z-index: 6;
+
+    top: 18%;
+    right: 27%;
+
+    width: 15%;
+    aspect-ratio: 329 / 272;
+
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    transition: transform 0.22s ease;
 }
 
+.aboutBtn img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.aboutBtn:hover {
+    transform: rotate(3deg) scale(1.06);
+}
+
+/* חלונית אודות */
+
+.aboutOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: grid;
+    place-items: center;
+
+    padding: 1rem;
+    background: rgba(31, 38, 39, 0.48);
+    backdrop-filter: blur(5px);
+}
+
+.aboutDialog {
+    position: relative;
+    width: min(90vw, 30rem);
+
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: 1rem;
+
+    background: #fff8ea;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.aboutDialog h2 {
+    margin: 0 0 0.7rem;
+    color: #087393;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.aboutDialog p {
+    margin: 0;
+    color: #354438;
+    font-size: 1.1rem;
+}
+
+.closeAbout {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+
+    display: grid;
+    place-items: center;
+
+    width: 2rem;
+    height: 2rem;
+
+    border: none;
+    border-radius: 50%;
+    background: #dbe8e3;
+    color: #354438;
+
+    cursor: pointer;
+}
+
+.aboutLogos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    margin-top: 1.5rem;
+}
+
+.aboutLogos img {
+    width: clamp(4rem, 8vw, 6rem);
+    height: auto;
+}
+
+/* התאמה למסכים שונים */
+
+@media (max-aspect-ratio: 1/1) {
+    .scene {
+        width: 100vw;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .startBtn,
+    .aboutBtn {
+        transition: none;
+    }
+}

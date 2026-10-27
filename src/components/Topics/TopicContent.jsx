@@ -11,6 +11,9 @@ import MemorialHours from "./TechnicalDetails/MemorialHours";
 import CasualtyOfficerHighlights from "./CasualtyOfficerGuidelines/CasualtyOfficerHighlights";
 import CasualtyOfficerRole from "./CasualtyOfficerGuidelines/CasualtyOfficerRole";
 import MemorialCategories from "./SpecialMemorials/MemorialCategories";
+import MemorialsSecondPage from "./SpecialMemorials/MemorialsSecondPage";
+import MemorialsThirdPage from "./SpecialMemorials/MemorialsThirdPage";
+import LastHeirFallen from "./LastHeirFallen/LastHeirFallen";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
@@ -84,6 +87,18 @@ export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onP
 
     if (topic.id === "militaryMemorials" && pageIndex === 0) {
         return <MemorialCategories onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "militaryMemorials" && pageIndex === 1) {
+        return <MemorialsSecondPage onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "militaryMemorials" && pageIndex === 2) {
+        return <MemorialsThirdPage onPageReady={onPageReady} />;
+    }
+
+    if (topic.id === "casualtyGuidelines") {
+        return <LastHeirFallen onPageReady={onPageReady} />;
     }
 
     return (

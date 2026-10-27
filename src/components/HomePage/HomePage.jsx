@@ -1,5 +1,5 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 
 import corkBoard from "../../assets/img/corkBoard.svg";
@@ -15,11 +15,17 @@ const topics = [
     { id: "injuredRelatives", title: "דגשים לקצין הנפגעים", color: "blue", popupColor: "#D7ECF8", type: "topic" },
     { id: "exercise2", title: "תרגול 2", popupColor: "#A7D6D1", type: "exercise" },
     { id: "militaryMemorials", title: "אזכרות ספ״כ וגיבורי ישראל, אזכרות מקורבים", color: "pink", popupColor: "#F9E6DC", type: "topic" },
-    { id: "casualtyGuidelines", title: "חללי נצר אחרון", color: "yellow", popupColor: "#FFE59B", type: "topic" },
+    { id: "casualtyGuidelines", title: "חללי נצר אחרון", color: "yellow", popupColor: "#FFF4CF", type: "topic" },
     { id: "exercise3", title: "תרגול 3", popupColor: "#D4C4A9", type: "exercise" }
 ];
 
+const FINAL_EXERCISE_ID = "exercise3";
+const END_PAGE_DELAY_MS = 900;
+
 const HomePage = () => {
+    const navigate = useNavigate();
+    const finishedFinalExercise = useRef(false);
+    const endPageTimer = useRef(null);
     const { unlockedIndex, progress, completePage } = useMemorialProgress(topics);
     const [activeTopic, setActiveTopic] = useState(null);
     const [startRect, setStartRect] = useState(null);
@@ -31,9 +37,30 @@ const HomePage = () => {
         setActiveTopic({ ...topic, index });
     };
 
+    useEffect(() => {
+        return () => clearTimeout(endPageTimer.current);
+    }, []);
+
     const closeTopic = () => {
         setActiveTopic(null);
         setStartRect(null);
+
+        // סיום תרגול 3 - שנייה קצרה ואז מעבר למסך הסיום
+        if (finishedFinalExercise.current) {
+            finishedFinalExercise.current = false;
+            endPageTimer.current = setTimeout(
+                () => navigate("/end"),
+                END_PAGE_DELAY_MS
+            );
+        }
+    };
+
+    const handleCompletePage = (pageIndex) => {
+        completePage(activeTopic.id, pageIndex);
+
+        if (activeTopic.id === FINAL_EXERCISE_ID) {
+            finishedFinalExercise.current = true;
+        }
     };
 
     const renderTopic = (topic, index) => {
@@ -59,9 +86,6 @@ const HomePage = () => {
                     <span className={styles.checkmark}>✓</span>
                 )}
 
-                {!isUnlocked && (
-                    <span className={styles.lock}>🔒</span>
-                )}
             </button>
         );
     };
@@ -98,7 +122,6 @@ const HomePage = () => {
                             }
                         >
                             <span>{topic.title}</span>
-                            {!isUnlocked && <span>🔒</span>}
                         </button>
                     );
                 })}
@@ -110,7 +133,7 @@ const HomePage = () => {
                     startRect={startRect}
                     onClose={closeTopic}
                     progress={progress[activeTopic.id]}
-                    onCompletePage={(pageIndex) => completePage(activeTopic.id, pageIndex)}
+                    onCompletePage={handleCompletePage}
                 />
             )}
         </div>

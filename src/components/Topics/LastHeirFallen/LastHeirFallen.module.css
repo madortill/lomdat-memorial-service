@@ -1,0 +1,124 @@
+.stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    width: min(100%, 72rem);
+    height: 100%;
+    min-height: 0;
+
+    margin-inline: auto;
+
+    gap: clamp(0.8rem, 2.4vh, 1.8rem);
+
+    padding:
+        clamp(0.5rem, 1.5vh, 1.5rem) clamp(0.8rem, 3vw, 3rem);
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #e6af7a transparent;
+}
+
+.intro {
+    margin: 0;
+    flex-shrink: 0;
+
+    color: #11556C;
+
+    font-size: clamp(0.95rem, 1.3vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* שורת הטקסט והתמונות */
+
+.factsRow {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.5rem, 1.1vw, 1.1rem);
+    direction: rtl;
+}
+
+.factCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1.25 1 0;
+    min-width: 0;
+
+    padding: clamp(0.8rem, 1.6vw, 1.6rem);
+
+    background: #DAE1C6;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    color: #11556C;
+    font-size: clamp(0.82rem, 1.05vw, 1.2rem);
+    line-height: 1.6;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.photo {
+    display: block;
+
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    height: clamp(9rem, 28vh, 16rem);
+
+    object-fit: cover;
+    border-radius: clamp(0.4rem, 0.6vw, 0.7rem);
+}
+
+/* שורת האזכרה */
+
+.memorialRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.6rem, 1.4vw, 1.4rem);
+    direction: rtl;
+}
+
+.memorialCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: clamp(5rem, 14vh, 8.5rem);
+
+    padding: clamp(0.8rem, 1.6vw, 1.6rem);
+
+    background: #E3C195;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    color: #582F10;
+    font-size: clamp(0.82rem, 1.05vw, 1.2rem);
+    line-height: 1.6;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.memorialCard u {
+    text-underline-offset: 0.2rem;
+}

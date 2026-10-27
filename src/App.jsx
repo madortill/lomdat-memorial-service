@@ -7,6 +7,7 @@ import { preloadAssets } from "./utils/preloadAssets";
 
 import OpeningPage from "./components/OpeningPage/OpeningPage";
 import HomePage from "./components/HomePage/HomePage";
+import EndPage from "./components/EndPage/EndPage";
 
 import table from "./assets/img/table.svg";
 import plant from "./assets/img/plant.svg";
@@ -51,6 +52,7 @@ function App() {
         <Routes>
           <Route path="/" element={<OpeningPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/end" element={<EndPage />} />
         </Routes>
       </div>
     </div>

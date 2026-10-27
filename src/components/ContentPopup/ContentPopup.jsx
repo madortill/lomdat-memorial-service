@@ -6,6 +6,9 @@ import TopicContent from "../Topics/TopicContent";
 import ExerciseContent from "../Exercises/ExerciseContent";
 import { pageCounts } from "../Topics/topicRegistry";
 
+// נושאים בני עמוד אחד שמסתמכים על כפתור "הבנתי!" של הניווט
+const singlePageTopicsWithNavigation = ["casualtyGuidelines"];
+
 export default function ContentPopup({ topic, startRect, onClose, progress, onCompletePage }) {
     const pageCount = pageCounts[topic.id] || 1;
     const completedPages = progress?.completedPages || [];
@@ -87,7 +90,9 @@ export default function ContentPopup({ topic, startRect, onClose, progress, onCo
         }
     };
 
-    const navigation = pageCount > 1 && (
+    const showNavigation = pageCount > 1 || singlePageTopicsWithNavigation.includes(topic.id);
+
+    const navigation = showNavigation && (
         <nav className={styles.navigation} aria-label="ניווט בין עמודי הנושא">
             {pageIndex > 0 && (
                 <button type="button" onClick={() => setPageIndex(index => index - 1)}>

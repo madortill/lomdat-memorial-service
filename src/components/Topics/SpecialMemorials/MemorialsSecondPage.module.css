@@ -1,0 +1,160 @@
+.page {
+    color: #7D4711;
+}
+
+.stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    width: min(100%, 72rem);
+    height: 100%;
+    min-height: 0;
+
+    margin-inline: auto;
+
+    gap: clamp(0.8rem, 2.4vh, 1.8rem);
+
+    padding:
+        clamp(0.5rem, 1.5vh, 1.5rem) clamp(0.8rem, 3vw, 3rem);
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: #e6af7a transparent;
+}
+
+/* שני המלבנים העליונים */
+
+.infoCards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.75rem, 2vw, 1.7rem);
+    direction: rtl;
+}
+
+.infoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: clamp(9rem, 26vh, 15rem);
+
+    gap: clamp(0.6rem, 1.6vh, 1.2rem);
+
+    padding:
+        clamp(0.9rem, 2vh, 1.8rem) clamp(1rem, 2.2vw, 2rem);
+
+    background: #ffd0a0;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    color: #7D4711;
+    font-size: clamp(0.88rem, 1.15vw, 1.25rem);
+    line-height: 1.55;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.infoCard p {
+    margin: 0;
+}
+
+.infoCard strong {
+    font-weight: 700;
+}
+
+/* המלבן החום - נוהל תיאום אזכרה */
+
+.processBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.7rem, 1.8vh, 1.5rem);
+
+    padding:
+        clamp(0.8rem, 2vh, 1.7rem) clamp(0.8rem, 2vw, 2rem);
+
+    background: #532e09;
+    border-radius: clamp(0.55rem, 0.9vw, 0.9rem);
+
+    box-sizing: border-box;
+}
+
+.processTitle {
+    margin: 0;
+
+    font-family: "Yuval", "Ploni", sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff0e3;
+    text-align: center;
+}
+
+.processTitle u {
+    font-family: inherit;
+    text-underline-offset: 0.2rem;
+}
+
+.processSteps {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-width: 0;
+
+    gap: clamp(0.3rem, 0.8vw, 0.9rem);
+    direction: rtl;
+}
+
+.processStep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: clamp(4.5rem, 12vh, 7.5rem);
+
+    padding: clamp(0.5rem, 1.1vw, 1.1rem);
+
+    background: #FFDAB7;
+    border-radius: clamp(0.5rem, 0.8vw, 0.8rem);
+
+    color: #7D4711;
+    font-size: clamp(0.82rem, 1.05vw, 1.2rem);
+    line-height: 1.45;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.arrow {
+    display: block;
+
+    flex-shrink: 0;
+    width: clamp(1.4rem, 2.6vw, 2.8rem);
+    height: auto;
+
+    object-fit: contain;
+    pointer-events: none;
+}

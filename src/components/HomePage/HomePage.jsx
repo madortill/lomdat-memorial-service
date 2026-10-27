@@ -20,7 +20,7 @@ const topics = [
 ];
 
 const FINAL_EXERCISE_ID = "exercise3";
-const END_PAGE_DELAY_MS = 900;
+const END_PAGE_DELAY_MS = 200;
 
 const HomePage = () => {
     const navigate = useNavigate();

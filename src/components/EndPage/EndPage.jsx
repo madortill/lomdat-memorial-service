@@ -5,7 +5,7 @@ import styles from "./EndPage.module.css";
 
 import corkBoard from "../../assets/img/corkBoard.svg";
 
-const CONFETTI_COUNT = 140;
+const CONFETTI_COUNT = 300;
 const CONFETTI_COLORS = [
     "#B96A1E",
     "#65ACC7",
@@ -32,7 +32,7 @@ const createConfetti = () =>
                 "--left": `${random(0, 100)}vw`,
                 "--width": `${isStrip ? size * 0.5 : size}rem`,
                 "--height": `${isStrip ? size * 1.5 : size}rem`,
-                "--duration": `${random(4.5, 9)}s`,
+                "--duration": `${random(2, 4)}s`,
                 "--delay": `${random(0, 6)}s`,
                 "--drift": `${random(-12, 12)}vw`,
                 "--spin": `${random(360, 1080)}deg`,

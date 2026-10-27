@@ -142,7 +142,7 @@
 
     opacity: 0;
 
-    animation: confettiFall var(--duration) linear var(--delay) infinite;
+    animation: confettiFall var(--duration) linear var(--delay) forwards;
     will-change: transform, opacity;
 }
 
@@ -154,7 +154,7 @@
 
     border-radius: 0.1rem;
 
-    animation: confettiSway var(--sway) ease-in-out infinite alternate;
+    animation: confettiSway var(--sway) ease-in-out;
 }
 
 .confettiShape.round {

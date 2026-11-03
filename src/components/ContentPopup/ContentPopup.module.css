@@ -128,9 +128,9 @@
 .homeBtn {
     position: absolute;
     z-index: 5;
-    top: clamp(12px, 2vh, 24px);
+    top: clamp(12px, 2.5vh, 30px);
     right: clamp(12px, 2vw, 30px);
-    width: clamp(36px, 3.5vw, 55px);
+    width: clamp(36px, 4vw, 62px);
     aspect-ratio: 1;
     padding: 0;
     border: 0;
@@ -198,7 +198,7 @@
     direction: rtl;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem clamp(16px, 4vw, 56px) clamp(14px, 2vh, 24px);
+    padding: 0.5rem clamp(16px, 2vw, 56px) clamp(14px, 2.5vh, 24px);
     gap: 1rem;
 }
 
@@ -214,13 +214,18 @@
     color: white;
     background: #078EB2;
     font-weight: 700;
-    font-size: clamp(12px, .9vw, 16px);
+    font-size: clamp(12px, 1.2vw, 20px);
     cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .navigation button:disabled {
     opacity: 0.35;
     cursor: default;
+}
+
+.navigation button:hover {
+    transform: scale(1.1);
 }
 
 .pageCounter {

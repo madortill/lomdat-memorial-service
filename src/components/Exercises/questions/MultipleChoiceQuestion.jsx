@@ -37,9 +37,6 @@ const MultipleChoiceQuestion = ({ question, answer, onAnswerChange, completed })
                     </button>
                 );
             })}
-            <span className={styles.choiceHint} role="status" aria-live="polite">
-                {completed ? "✓ תשובה נכונה" : wrongOption ? "לא בדיוק, נסו שוב" : ""}
-            </span>
         </div>
     );
 };

@@ -21,7 +21,7 @@
     box-sizing: border-box;
 }
 
-/* משטח עיצוב אחיד */
+/* הרקע - ממלא את כל המסך, והקנבס ממורכז מעליו */
 
 .scene {
     position: relative;
@@ -31,6 +31,25 @@
 
     overflow: hidden;
     isolation: isolate;
+
+    display: grid;
+    place-items: center;
+}
+
+/*
+  קנבס בפרופורציה קבועה (16:9) שמתכווץ כמקשה אחת.
+  כל מה שמעל המחברת ממוקם באחוזים מהקנבס, ולכן הפריסה
+  זהה בכל גודל חלון (בפרופורציות אחרות נוצרים רק שוליים של עץ).
+  לשינוי הפרופורציה מחליפים רק את --canvas-ratio.
+*/
+
+.canvas {
+    --canvas-ratio: 16 / 9;
+
+    position: relative;
+
+    width: min(100vw, calc(100dvh * var(--canvas-ratio)));
+    aspect-ratio: var(--canvas-ratio);
 
     container-type: inline-size;
 }
@@ -58,7 +77,7 @@
     position: absolute;
     z-index: 1;
 
-    width: min(92vw, 155vh);
+    width: 87.2%;
     height: auto;
 
     top: 50%;
@@ -107,10 +126,10 @@
     position: absolute;
     z-index: 5;
 
-    width: 9%;
+    width: 10%;
     height: auto;
 
-    left: 20%;
+    left: 16%;
     top: 25%;
 
     transform: rotate(-11deg);
@@ -121,10 +140,10 @@
     position: absolute;
     z-index: 5;
 
-    width: 10%;
+    width: 11%;
     height: auto;
 
-    right: 19%;
+    right: 15%;
     bottom: 22%;
 
     transform: rotate(-10deg);
@@ -179,7 +198,7 @@
 
     color: #303238;
     font-family: "PloniB", "Ploni", sans-serif;
-    font-size: clamp(1.4rem, 6.2cqw, 6rem);
+    font-size: 7cqw;
     font-weight: 700;
     line-height: 1.03;
     text-align: center;
@@ -338,14 +357,6 @@
 .aboutLogos img {
     width: clamp(4rem, 8vw, 6rem);
     height: auto;
-}
-
-/* התאמה למסכים שונים */
-
-@media (max-aspect-ratio: 1/1) {
-    .scene {
-        width: 100vw;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {

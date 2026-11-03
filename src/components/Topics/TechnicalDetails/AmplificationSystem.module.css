@@ -277,40 +277,6 @@
     }
 }
 
-/* התאמה למסכים נמוכים */
-
-@media (max-height: 730px) {
-    .mixer {
-        height: min(100%, 56vh);
-    }
-
-    .infoBox {
-        min-height: 7rem;
-        padding: 0.8rem;
-    }
-
-    .infoBox p {
-        font-size: clamp(0.8rem, 1.1vw, 1.1rem);
-        line-height: 1.4;
-    }
-}
-
-/* התאמה למסכים צרים */
-
-@media (max-width: 800px) {
-    .stageExpanded {
-        gap: 0.7rem;
-    }
-
-    .infoBox {
-        padding: 0.7rem;
-    }
-
-    .infoBox p {
-        font-size: clamp(0.75rem, 1.5vw, 1rem);
-    }
-}
-
 /* נגישות */
 
 @media (prefers-reduced-motion: reduce) {

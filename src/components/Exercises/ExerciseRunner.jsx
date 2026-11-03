@@ -74,11 +74,14 @@ const ExerciseRunner = ({ exerciseId, questions, onComplete }) => {
     }, [progress, storageKey]);
 
     const updateAnswer = value => {
-        if (phase !== "editing" || finishing) return;
+        if (phase === "complete" || finishing) return;
         setProgress(current => ({
             ...current,
             answers: current.answers.map((item, i) => i === current.index ? value : item),
-            changed: current.changed.map((item, i) => i === current.index ? true : item)
+            changed: current.changed.map((item, i) => i === current.index ? true : item),
+            // אחרי בדיקה שגויה, כל שינוי מנקה את סימוני הטעויות וחוזר לעריכה
+            phases: current.phases.map((item, i) =>
+                i === current.index && item === "review" ? "editing" : item)
         }));
     };
 
@@ -93,21 +96,15 @@ const ExerciseRunner = ({ exerciseId, questions, onComplete }) => {
         }));
     };
 
+    // בדיקה: נכון - אפשר להמשיך. שגוי - מסמנים טעויות וחוזרים לגרירה (צריך לשנות משהו כדי לבדוק שוב)
     const checkOrdering = () => {
         if (question.type !== "ordering" || phase !== "editing" || !changed[index] || finishing) return;
         setProgress(current => ({
             ...current,
             phases: current.phases.map((item, i) => i === current.index
-                ? correct ? "complete" : "review" : item)
-        }));
-    };
-
-    const revealAnswer = () => {
-        if (phase !== "review" || finishing) return;
-        setProgress(current => ({
-            ...current,
-            answers: current.answers.map((item, i) => i === current.index ? [...question.correctOrder] : item),
-            phases: current.phases.map((item, i) => i === current.index ? "complete" : item)
+                ? correct ? "complete" : "review" : item),
+            changed: current.changed.map((item, i) =>
+                i === current.index && !correct ? false : item)
         }));
     };
 
@@ -157,23 +154,18 @@ const ExerciseRunner = ({ exerciseId, questions, onComplete }) => {
             </div>
 
             <footer className={styles.footer}>
-                <div className={styles.checkRow}>
-                    {question.type === "ordering" && (
+                {question.type === "ordering" && (
+                    <div className={styles.checkRow}>
                         <button
                             type="button"
                             className={styles.checkButton}
-                            disabled={phase === "complete" || (phase === "editing" && !changed[index])}
-                            onClick={phase === "review" ? revealAnswer : checkOrdering}
+                            disabled={phase !== "editing" || !changed[index]}
+                            onClick={checkOrdering}
                         >
-                            {phase === "review" ? "לצפייה בתשובה" : "בדיקה"}
+                            בדיקה
                         </button>
-                    )}
-                    <span className={styles.feedback} role="status" aria-live="polite">
-                        {question.type === "ordering" && phase === "review" && "יש טעויות בסדר. אפשר לצפות בתשובה הנכונה."}
-                        {question.type === "ordering" && phase === "complete" && (correct ? "כל הכבוד! הסדר נכון." : "התשובה הנכונה מוצגת.")}
-                        {question.type === "multiple-choice" && complete && "נכון מאוד! אפשר להמשיך."}
-                    </span>
-                </div>
+                    </div>
+                )}
                 <nav className={styles.navigation} aria-label="ניווט בין שאלות התרגול">
                     {index > 0 && (
                         <button type="button" className={styles.previousButton} onClick={previousQuestion}>

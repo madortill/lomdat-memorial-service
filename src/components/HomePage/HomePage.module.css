@@ -18,11 +18,9 @@
     pointer-events: none;
 }
 
-
-
 .boardArea {
     position: absolute;
-    top: 15%;
+    top: 12%;
     left: 50%;
     transform: translateX(-50%);
     width: min(78vw, 112vh, 78rem);
@@ -40,6 +38,9 @@
 }
 
 .notesGrid {
+    /* הגדלה של כל הפתקיות יחד (1 = גודל מקורי) */
+    --note-scale: 1.08;
+
     position: absolute;
     inset: 13% 12% 13% 12%;
     display: grid;
@@ -65,12 +66,17 @@
 
 .note {
     --ratio: 1;
+    --tilt: 0deg;
+    --size: 1;
+    --check-top: -4%;
+    --check-right: -4%;
+    --check-size: 1;
 
     position: relative;
     display: grid;
     place-items: center;
 
-    width: min(100cqw, calc(100cqh * var(--ratio)));
+    width: calc(min(100cqw, calc(100cqh * var(--ratio))) * var(--note-scale) * var(--size));
     aspect-ratio: var(--ratio);
 
     padding: 0;
@@ -80,7 +86,7 @@
     cursor: pointer;
 
     container-type: inline-size;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .noteImage {
@@ -94,8 +100,11 @@
     transition: filter 0.6s ease, opacity 0.6s ease;
 }
 
+/* כמו בגרסה המקורית: הפתקית מתיישרת, עולה, גדלה ומתבהרת קלות
+   (הנטייה מובנית בתמונה, לכן מסובבים בדיוק בכמה שהיא נוטה) */
 .note:hover:not(:disabled) {
-    transform: translateY(-0.3rem) scale(1.05);
+    filter: brightness(1.05);
+    transform: translateY(-0.3rem) rotate(calc(var(--tilt) * -1)) scale(1.05);
 }
 
 .noteTitle {
@@ -105,22 +114,22 @@
     margin-top: 12%;
 
     font-family: "Ploni", sans-serif;
-    font-size: clamp(0.85rem, 11cqw, 2rem);
+    font-size: clamp(0.85rem, 16cqw, 11rem);
     font-weight: 700;
     line-height: 1.12;
     text-align: center;
 }
 
 .noteTitleLong {
-    font-size: clamp(0.75rem, 8.4cqw, 1.7rem);
+    font-size: clamp(0.85rem, 13cqw, 11rem);
 }
 
 .checkmark {
     position: absolute;
     z-index: 2;
-    top: -4%;
-    right: -4%;
-    width: clamp(1.1rem, 2vw, 1.7rem);
+    top: var(--check-top, -4%);
+    right: var(--check-right, -4%);
+    width: calc(clamp(1.1rem, 2vw, 1.7rem) * var(--check-size, 1));
     aspect-ratio: 1;
     border-radius: 50%;
     display: flex;
@@ -168,17 +177,17 @@
 }
 
 .exercise1 {
-    width: clamp(5.2rem, 10.4vw, 11rem);
+    width: clamp(5.2rem, 8.4vw, 11rem);
 }
 
 .exercise2 {
-    width: clamp(7rem, 14.6vw, 15.5rem);
-    margin-bottom: clamp(0.4rem, 1.4vh, 1.2rem);
+    width: clamp(5.2rem, 11.4vw, 15rem);
+    margin-bottom: clamp(-2rem, -2vh, 1.2rem);
 }
 
 .exercise3 {
-    width: clamp(7.2rem, 15vw, 16rem);
-    margin-bottom: clamp(0.1rem, 0.4vh, 0.4rem);
+    width: clamp(7.2rem, 12vw, 16rem);
+    margin-bottom: clamp(-2rem, -1vh, 1.2rem);
 }
 
 /* נעול - אפור ושקוף; נפתח - מתמלא בצבע */
@@ -204,6 +213,24 @@
     animation: softGlow 1.9s ease-in-out infinite;
 }
 
+/* בנוסף לזוהר - הפריט "פועם" (גדל וקטן) כדי למשוך תשומת לב.
+   משתמשים ב-scale הנפרד כדי שלא יתנגש ב-transform של ה-hover */
+.glowing {
+    animation: attentionPulse 1.9s ease-in-out infinite;
+}
+
+@keyframes attentionPulse {
+
+    0%,
+    100% {
+        scale: 1;
+    }
+
+    50% {
+        scale: 1.08;
+    }
+}
+
 @keyframes softGlow {
 
     0%,
@@ -219,6 +246,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+    .glowing {
+        animation: none;
+    }
 
     .glowing .noteImage,
     .glowing .exerciseImage {

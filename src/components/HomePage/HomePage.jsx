@@ -28,14 +28,19 @@ const topics = [
     { id: "exercise3", title: "תרגול 3", popupColor: "#D4C4A9", type: "exercise" }
 ];
 
-// תמונת הפתקית לפי הצבע, יחד עם הפרופורציות שלה (רוחב / גובה)
+// תמונת הפתקית לפי הצבע, הפרופורציות שלה (רוחב / גובה), הנטייה שכבר מובנית בתמונה (במעלות)
+// ו-size - הגדלה של פתקית ספציפית (1 = גודל רגיל, 1.15 = גדולה ב-15%)
+// ו-check - מיקום סימון ה-✓ באחוזים מגודל הפתקית עצמה (ולכן רספונסיבי):
+//   top: כמה אחוזים מהקצה העליון (שלילי = מעל הפתקית, חיובי = בתוכה)
+//   right: כמה אחוזים מהקצה הימני (שלילי = מחוץ לפתקית, חיובי = בתוכה)
+//   size: גודל הסימון (1 = רגיל)
 const noteImages = {
-    cream: { src: petekBeige, ratio: "230 / 230" },
-    green: { src: petekGreen, ratio: "189 / 220" },
-    purple: { src: petekPurple, ratio: "242 / 191" },
-    blue: { src: petekBlue, ratio: "226 / 234" },
-    pink: { src: petekPink, ratio: "267 / 267" },
-    yellow: { src: petekYellow, ratio: "235 / 226" }
+    cream: { src: petekBeige, ratio: "230 / 230", tilt: 6, size: 1, check: { top: 15, right: 2, size: 1 } },
+    green: { src: petekGreen, ratio: "189 / 220", tilt: 3, size: 1, check: { top: 5, right: -4, size: 1 } },
+    purple: { src: petekPurple, ratio: "242 / 191", tilt: -4.5, size: 1, check: { top: -4, right: 3, size: 1 } },
+    blue: { src: petekBlue, ratio: "226 / 234", tilt: 4, size: 1, check: { top: 8, right: -4, size: 1 } },
+    pink: { src: petekPink, ratio: "267 / 267", tilt: -1, size: 1.12, check: { top: 10, right: 0, size: 1 } },
+    yellow: { src: petekYellow, ratio: "235 / 226", tilt: -1.5, size: 1, check: { top: 2, right: 3, size: 1 } }
 };
 
 const exerciseImages = {
@@ -156,7 +161,14 @@ const HomePage = () => {
                         !isUnlocked ? styles.locked : "",
                         shouldGlow(topic, index) ? styles.glowing : ""
                     ].filter(Boolean).join(" ")}
-                    style={{ "--ratio": image.ratio }}
+                    style={{
+                        "--ratio": image.ratio,
+                        "--tilt": `${image.tilt}deg`,
+                        "--size": image.size,
+                        "--check-top": `${image.check.top}%`,
+                        "--check-right": `${image.check.right}%`,
+                        "--check-size": image.check.size
+                    }}
                     onClick={(event) => openTopic(topic, index, event)}
                     disabled={!isUnlocked}
                     aria-label={topic.title}

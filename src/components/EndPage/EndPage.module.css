@@ -11,7 +11,7 @@
 
 .boardArea {
     position: absolute;
-    top: 16%;
+    top: 12%;
     left: 50%;
     transform: translateX(-50%);
     width: min(78vw, 112vh, 78rem);

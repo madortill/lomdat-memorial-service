@@ -11,21 +11,24 @@ import tillSticker from "../../assets/img/tillSticker.svg";
 import pencil from "../../assets/img/pencil.svg";
 import plantAbove from "../../assets/img/plantAbove.svg";
 import notebook from "../../assets/img/notebook.svg";
+import bgAbout from "../../assets/img/bgAbout.png";
+import aboutMe from "../../assets/img/aboutMe.png";
+import mapalRope from "../../assets/img/mapalRope.svg";
 
 // תוכן חלונית האודות
 const DEDICATION =
-    "הלומדה הוקדשה לזכרו של רס״ר (במיל׳) יובל גבאי ז״ל, שנפל ב-7.10 בדרך מנקודת ההתייצבות של יחידתו למשימתם בישוב איתמר. הגופן באדיבות פרויקט ההנצחה ״אות חיים״.";
+    "הלומדה פותחה לזכרו של רס”ר (במיל’) יובל גבאי ז”ל, שנפל ב7.10 בדרך מנקודת ההתייצבות של יחידתו למשימתם ביישוב איתמר. הגופן באדיבות פרויקט ההנצחה ״אות חיים״.";
 
-const CREDITS = [
-    { title: "גרפיקה", names: ["רב״ט צאלה בלמקר", "רב״ט קשת ברי", "רב״ט דינה ליבשיץ"] },
-    { title: "רמ״ד טי״ל", names: ["סמ״ר קליה מדבדב"] },
-    { title: "גרסה", names: ["נובמבר 2026"] }
-];
+const TILL_HEAD = { title: "רמ״ד טי״ל:", name: "סמ״ר קטיה מדבדב" };
+
+const GRAPHICS = {
+    title: "גרפיקה",
+    names: ["רב״ט צאלה בלמקר", "רב״ט קשת פרי", "רב״ט דינה ליבשיץ"]
+};
 
 const LEAD_DEVELOPER = { title: "מפתחת ראשית", name: "רב״ט צאלה בלמקר" };
 
-// כשתהיה תמונה של המפתחת - מייבאים אותה ושמים כאן במקום null
-const LEAD_DEVELOPER_PHOTO = null;
+const VERSION = { title: "גרסה:", value: "נובמבר 2026" };
 
 const OpeningPage = () => {
     const navigate = useNavigate();
@@ -133,6 +136,20 @@ const OpeningPage = () => {
                         aria-modal="true"
                         aria-labelledby="about-title"
                     >
+                        <img
+                            src={bgAbout}
+                            alt=""
+                            className={styles.aboutPaper}
+                            draggable={false}
+                        />
+
+                        <img
+                            src={mapalRope}
+                            alt=""
+                            className={styles.aboutRope}
+                            draggable={false}
+                        />
+
                         <button
                             type="button"
                             className={styles.closeAbout}
@@ -146,38 +163,41 @@ const OpeningPage = () => {
                             אודות
                         </h2>
 
-                        <div className={styles.aboutBody}>
-                            <div className={styles.aboutCredits}>
-                                {CREDITS.map(group => (
-                                    <div key={group.title} className={styles.creditGroup}>
-                                        <h3>{group.title}</h3>
-                                        {group.names.map(name => (
-                                            <p key={name}>{name}</p>
-                                        ))}
-                                    </div>
+                        <div className={styles.aboutCredits}>
+                            <div className={`${styles.aboutCard} ${styles.cardPink}`}>
+                                <p>
+                                    <strong><u>{TILL_HEAD.title}</u></strong>{" "}
+                                    {TILL_HEAD.name}
+                                </p>
+                            </div>
+
+                            <div className={`${styles.aboutCard} ${styles.cardBlue}`}>
+                                <h3>{GRAPHICS.title}</h3>
+                                {GRAPHICS.names.map(name => (
+                                    <p key={name}>{name}</p>
                                 ))}
                             </div>
-
-                            <div className={styles.aboutDeveloper}>
-                                {LEAD_DEVELOPER_PHOTO ? (
-                                    <img
-                                        src={LEAD_DEVELOPER_PHOTO}
-                                        alt=""
-                                        className={styles.developerPhoto}
-                                        draggable={false}
-                                    />
-                                ) : (
-                                    <div className={styles.developerPhoto} aria-hidden="true">
-                                        <span>כאן תהיה תמונה</span>
-                                    </div>
-                                )}
-
-                                <h3>{LEAD_DEVELOPER.title}</h3>
-                                <p>{LEAD_DEVELOPER.name}</p>
-                            </div>
-
-                            <p className={styles.aboutDedication}>{DEDICATION}</p>
                         </div>
+
+                        <div className={styles.aboutDeveloper}>
+                            <img
+                                src={aboutMe}
+                                alt=""
+                                className={styles.developerPhoto}
+                                draggable={false}
+                            />
+
+                            <h3>{LEAD_DEVELOPER.title}</h3>
+                            <p>{LEAD_DEVELOPER.name}</p>
+                        </div>
+
+                        <div className={`${styles.aboutCard} ${styles.cardYellow}`}>
+                            <p>{DEDICATION}</p>
+                        </div>
+
+                        <p className={styles.aboutVersion}>
+                            <u>{VERSION.title}</u> {VERSION.value}
+                        </p>
                     </section>
                 </div>
             )}

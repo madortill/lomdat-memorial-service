@@ -304,59 +304,162 @@
 
 .aboutDialog {
     position: relative;
-    width: min(90vw, 30rem);
+    width: min(92vw, 56rem);
+    max-height: 92dvh;
 
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    border-radius: 1rem;
+    padding: clamp(1.4rem, 3vw, 2.6rem) clamp(1.4rem, 4vw, 3.4rem);
+    border-radius: 1.2rem;
 
     background: #fff8ea;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+
+    overflow-y: auto;
     text-align: center;
 }
 
-.aboutDialog h2 {
-    margin: 0 0 0.7rem;
-    color: #087393;
-    font-size: clamp(1.5rem, 2vw, 2rem);
-}
+.aboutTitle {
+    margin: 0 0 clamp(1rem, 3vh, 2rem);
 
-.aboutDialog p {
-    margin: 0;
-    color: #354438;
-    font-size: 1.1rem;
+    color: #087393;
+    font-family: "PloniB", "Ploni", sans-serif;
+    font-size: clamp(1.6rem, 2.4vw, 2.5rem);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 0.12rem;
+    text-underline-offset: 0.35rem;
 }
 
 .closeAbout {
     position: absolute;
-    top: 0.8rem;
-    left: 0.8rem;
+    top: clamp(0.8rem, 1.6vw, 1.3rem);
+    left: clamp(0.8rem, 1.6vw, 1.3rem);
 
     display: grid;
     place-items: center;
 
-    width: 2rem;
-    height: 2rem;
+    width: 2.4rem;
+    height: 2.4rem;
 
     border: none;
     border-radius: 50%;
-    background: #dbe8e3;
-    color: #354438;
+    background: #cfdde3;
+    color: #5c7480;
+
+    font-family: "PloniB", "Ploni", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
 
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.aboutLogos {
-    display: flex;
-    justify-content: center;
+.closeAbout:hover {
+    background: #bdd0d8;
+    transform: scale(1.08);
+}
+
+.closeAbout:focus-visible {
+    outline: 0.2rem solid #087393;
+    outline-offset: 0.15rem;
+}
+
+/* שלוש עמודות: קרדיטים (ימין), מפתחת (אמצע), הקדשה (שמאל) */
+
+.aboutBody {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2.4rem);
 
-    margin-top: 1.5rem;
+    direction: rtl;
 }
 
-.aboutLogos img {
-    width: clamp(4rem, 8vw, 6rem);
-    height: auto;
+.aboutCredits {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.8rem, 2vh, 1.4rem);
+
+    text-align: right;
+}
+
+.creditGroup h3,
+.aboutDeveloper h3 {
+    margin: 0 0 0.35rem;
+
+    color: #4f9dc0;
+    font-family: "PloniB", "Ploni", sans-serif;
+    font-size: clamp(1rem, 1.3vw, 1.35rem);
+    font-weight: 700;
+}
+
+.creditGroup h3 {
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.25rem;
+}
+
+.creditGroup p,
+.aboutDeveloper p,
+.aboutDedication {
+    margin: 0;
+
+    color: #1f6f93;
+    font-family: "Yuval", "Ploni", sans-serif;
+    font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+    line-height: 1.7;
+}
+
+.aboutDeveloper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.15rem;
+}
+
+.developerPhoto {
+    display: grid;
+    place-items: center;
+
+    width: clamp(7rem, 14vw, 10.5rem);
+    aspect-ratio: 1;
+    margin-bottom: clamp(0.6rem, 1.6vh, 1.1rem);
+
+    border-radius: 50%;
+    background: #d4d4d4;
+    object-fit: cover;
+
+    color: #3f3f3f;
+    font-family: "PloniB", "Ploni", sans-serif;
+    font-size: clamp(0.9rem, 1.2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.developerPhoto span {
+    max-width: 7ch;
+}
+
+.aboutDedication {
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    .aboutBody {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .aboutCredits {
+        align-items: center;
+        text-align: center;
+    }
+
+    .aboutDeveloper {
+        order: -1;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

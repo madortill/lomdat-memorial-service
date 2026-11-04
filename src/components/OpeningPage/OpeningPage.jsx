@@ -12,6 +12,21 @@ import pencil from "../../assets/img/pencil.svg";
 import plantAbove from "../../assets/img/plantAbove.svg";
 import notebook from "../../assets/img/notebook.svg";
 
+// תוכן חלונית האודות
+const DEDICATION =
+    "הלומדה הוקדשה לזכרו של רס״ר (במיל׳) יובל גבאי ז״ל, שנפל ב-7.10 בדרך מנקודת ההתייצבות של יחידתו למשימתם בישוב איתמר. הגופן באדיבות פרויקט ההנצחה ״אות חיים״.";
+
+const CREDITS = [
+    { title: "גרפיקה", names: ["רב״ט צאלה בלמקר", "רב״ט קשת ברי", "רב״ט דינה ליבשיץ"] },
+    { title: "רמ״ד טי״ל", names: ["סמ״ר קליה מדבדב"] },
+    { title: "גרסה", names: ["נובמבר 2026"] }
+];
+
+const LEAD_DEVELOPER = { title: "מפתחת ראשית", name: "רב״ט צאלה בלמקר" };
+
+// כשתהיה תמונה של המפתחת - מייבאים אותה ושמים כאן במקום null
+const LEAD_DEVELOPER_PHOTO = null;
+
 const OpeningPage = () => {
     const navigate = useNavigate();
     const [showAbout, setShowAbout] = useState(false);
@@ -124,16 +139,44 @@ const OpeningPage = () => {
                             onClick={() => setShowAbout(false)}
                             aria-label="סגירה"
                         >
-                            ✕
+                            X
                         </button>
 
-                        <h2 id="about-title">אודות הלומדה</h2>
+                        <h2 id="about-title" className={styles.aboutTitle}>
+                            אודות
+                        </h2>
 
-                        <p>נוהל תיאום אזכרה</p>
+                        <div className={styles.aboutBody}>
+                            <div className={styles.aboutCredits}>
+                                {CREDITS.map(group => (
+                                    <div key={group.title} className={styles.creditGroup}>
+                                        <h3>{group.title}</h3>
+                                        {group.names.map(name => (
+                                            <p key={name}>{name}</p>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
 
-                        <div className={styles.aboutLogos}>
-                            <img src={tillSticker} alt="מדור טי״ל" />
-                            <img src={bahad11Sticker} alt="בה״ד 11" />
+                            <div className={styles.aboutDeveloper}>
+                                {LEAD_DEVELOPER_PHOTO ? (
+                                    <img
+                                        src={LEAD_DEVELOPER_PHOTO}
+                                        alt=""
+                                        className={styles.developerPhoto}
+                                        draggable={false}
+                                    />
+                                ) : (
+                                    <div className={styles.developerPhoto} aria-hidden="true">
+                                        <span>כאן תהיה תמונה</span>
+                                    </div>
+                                )}
+
+                                <h3>{LEAD_DEVELOPER.title}</h3>
+                                <p>{LEAD_DEVELOPER.name}</p>
+                            </div>
+
+                            <p className={styles.aboutDedication}>{DEDICATION}</p>
                         </div>
                     </section>
                 </div>

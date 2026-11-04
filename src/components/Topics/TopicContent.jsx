@@ -17,7 +17,7 @@ import LastHeirFallen from "./LastHeirFallen/LastHeirFallen";
 
 export default function TopicContent({ topic, pageIndex = 0, onPageComplete, onPageReady }) {
     if (topic.id === "introduction") {
-        return <Introduction onPageComplete={onPageComplete} />;
+        return <Introduction onPageReady={onPageReady} />;
     }
 
     if (topic.id === "memorialProcess" && pageIndex === 0) {

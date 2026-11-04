@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import TopicLayout from "../TopicLayout/TopicLayout";
 import styles from "./TransportationCoordination.module.css";
@@ -88,7 +87,7 @@ const readVisited = () => {
 
 const TransportationCoordination = ({ onPageReady }) => {
     const [visited, setVisited] = useState(readVisited);
-    const [animatingId, setAnimatingId] = useState(null);
+    const [animatingIds, setAnimatingIds] = useState([]);
 
     const allVisited = transportationSteps.every(step =>
         visited.includes(step.id)
@@ -103,11 +102,12 @@ const TransportationCoordination = ({ onPageReady }) => {
     const [expanded, setExpanded] = useState([]);
 
     const handleStepClick = (id) => {
-        if (animatingId !== null) return;
+        // רק הרכב שנלחץ ננעל בזמן האנימציה שלו, ושאר הרכבים נשארים לחיצים
+        if (animatingIds.includes(id)) return;
 
         const isOpen = expanded.includes(id);
 
-        setAnimatingId(id);
+        setAnimatingIds(current => [...current, id]);
 
         setExpanded(current =>
             isOpen
@@ -130,8 +130,8 @@ const TransportationCoordination = ({ onPageReady }) => {
     const handleAnimationEnd = (event, id) => {
         if (event.target !== event.currentTarget) return;
 
-        setAnimatingId(current =>
-            current === id ? null : current
+        setAnimatingIds(current =>
+            current.filter(item => item !== id)
         );
     };
 
@@ -158,7 +158,7 @@ const TransportationCoordination = ({ onPageReady }) => {
                     {transportationSteps.map(step => {
                         const isVisited = visited.includes(step.id);
                         const isOpen = expanded.includes(step.id);
-                        const isAnimating = animatingId === step.id;
+                        const isAnimating = animatingIds.includes(step.id);
 
                         return (
                             <button
@@ -174,7 +174,7 @@ const TransportationCoordination = ({ onPageReady }) => {
                                             : styles.closing
                                         : ""
                                 ].filter(Boolean).join(" ")}
-                                disabled={animatingId !== null}
+                                disabled={isAnimating}
                                 onClick={() => handleStepClick(step.id)}
                                 aria-expanded={isOpen}
                             >
@@ -183,7 +183,9 @@ const TransportationCoordination = ({ onPageReady }) => {
                                 </span>
 
                                 <span className={styles.stepContent}>
-                                    {step.content}
+                                    <span className={styles.stepContentText}>
+                                        {step.content}
+                                    </span>
                                 </span>
 
                                 <img

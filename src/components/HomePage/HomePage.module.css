@@ -51,111 +51,75 @@
     justify-items: center;
 }
 
+/* תא הפתקית - משמש כמיכל למדידת גודל התמונה */
+
+.noteCell {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    container-type: size;
+}
+
+/* הכפתור הוא בדיוק בגודל תמונת הפתקית (בלי שוליים ריקים), כך שסימון ה-✓ והכותרת יושבים עליה */
+
 .note {
+    --ratio: 1;
+
     position: relative;
-    width: 83%;
-    height: 85%;
-    border: 0.08rem solid rgba(80, 56, 42, 0.5);
-    border-radius: 0.22rem;
-    background-color: #FFF6DA;
+    display: grid;
+    place-items: center;
+
+    width: min(100cqw, calc(100cqh * var(--ratio)));
+    aspect-ratio: var(--ratio);
+
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: #087393;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem;
     cursor: pointer;
-    box-shadow: 0.18rem 0.3rem 0.35rem rgba(73, 44, 18, 0.2);
-    transition: transform 0.2s ease, filter 0.2s ease;
+
+    container-type: inline-size;
+    transition: transform 0.2s ease;
 }
 
-.note:nth-child(1) {
-    transform: rotate(5deg);
-}
-
-.note:nth-child(2) {
-    transform: rotate(-3deg);
-}
-
-.note:nth-child(3) {
-    transform: rotate(4deg);
-}
-
-.note:nth-child(4) {
-    transform: rotate(-4deg);
-}
-
-.note:nth-child(5) {
-    transform: rotate(2deg);
-}
-
-.note:nth-child(6) {
-    transform: rotate(-5deg);
+.noteImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.6s ease, opacity 0.6s ease;
 }
 
 .note:hover:not(:disabled) {
-    filter: brightness(1.05);
-    transform: translateY(-0.3rem) rotate(0deg) scale(1.05);
-}
-
-.note:disabled {
-    cursor: default;
-    filter: saturate(0.55);
-    opacity: 0.7;
+    transform: translateY(-0.3rem) scale(1.05);
 }
 
 .noteTitle {
+    position: relative;
+    z-index: 1;
+    max-width: 78%;
+    margin-top: 12%;
+
     font-family: "Ploni", sans-serif;
-    font-size: clamp(0.85rem, 1.35vw, 1.6rem);
+    font-size: clamp(0.85rem, 11cqw, 2rem);
     font-weight: 700;
     line-height: 1.12;
     text-align: center;
-    max-width: 100%;
 }
 
-.cream {
-    background-color: #FFF6DB;
+.noteTitleLong {
+    font-size: clamp(0.75rem, 8.4cqw, 1.7rem);
 }
 
-.green {
-    background-color: #E2EAD2;
-}
-
-.purple {
-    background-color: #DCD4ED;
-}
-
-.blue {
-    background-color: #A5D9F2;
-}
-
-.pink {
-    background-color: #F9DFD7;
-}
-
-.yellow {
-    background-color: #FFE59B;
-}
-
-.pin {
+.checkmark {
     position: absolute;
-    top: -0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(0.65rem, 1.3vw, 1.15rem);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%,
-            #F5B8B3,
-            #BF4F4A 75%);
-    border: 0.07rem solid #87463E;
-    box-shadow: 0.06rem 0.15rem 0.1rem rgba(0, 0, 0, 0.25);
-}
-
-.checkmark,
-.lock {
-    position: absolute;
-    top: -0.35rem;
-    right: -0.35rem;
+    z-index: 2;
+    top: -4%;
+    right: -4%;
     width: clamp(1.1rem, 2vw, 1.7rem);
     aspect-ratio: 1;
     border-radius: 50%;
@@ -168,65 +132,112 @@
     font-weight: 700;
 }
 
-.lock {
-    background-color: #AC9B89;
-    font-size: clamp(0.55rem, 0.8vw, 0.8rem);
-}
+/* תרגולים */
 
 .exercises {
     position: absolute;
-    bottom: clamp(2rem, 5.8vh, 4rem);
+    bottom: clamp(1.4rem, 3.4vh, 3rem);
     right: clamp(2rem, 6vw, 7rem);
     display: flex;
     direction: rtl;
     align-items: flex-end;
-    gap: clamp(0.7rem, 1.5vw, 1.8rem);
+    gap: clamp(0.7rem, 2.2vw, 2.6rem);
     z-index: 5;
 }
 
 .exercise {
     position: relative;
-    width: clamp(5.5rem, 11vw, 10rem);
-    height: clamp(2.7rem, 6vh, 4.5rem);
-    border: 0.13rem solid #947052;
-    border-radius: 0.7rem 0.7rem 0.4rem 0.4rem;
-    background-color: #F6E2BF;
-    color: #58320F;
-    box-shadow: 0 0.3rem 0 rgba(87, 57, 32, 0.25);
-    font-size: clamp(0.8rem, 1vw, 1.15rem);
-    font-weight: 700;
+    padding: 0;
+    border: 0;
+    background: transparent;
     cursor: pointer;
     transition: transform 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
 }
 
 .exercise:hover:not(:disabled) {
     transform: translateY(-0.4rem);
 }
 
-.exercise:disabled {
-    opacity: 0.65;
-    cursor: default;
+.exerciseImage {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.6s ease, opacity 0.6s ease;
 }
 
 .exercise1 {
-    background-color: #F1DDC4;
+    width: clamp(5.2rem, 10.4vw, 11rem);
 }
 
 .exercise2 {
-    background-color: #A7D6D1;
+    width: clamp(7rem, 14.6vw, 15.5rem);
+    margin-bottom: clamp(0.4rem, 1.4vh, 1.2rem);
 }
 
 .exercise3 {
-    background-color: #D4C4A9;
+    width: clamp(7.2rem, 15vw, 16rem);
+    margin-bottom: clamp(0.1rem, 0.4vh, 0.4rem);
 }
 
+/* נעול - אפור ושקוף; נפתח - מתמלא בצבע */
 
+.locked {
+    cursor: default;
+}
+
+.locked .noteImage,
+.locked .exerciseImage {
+    filter: grayscale(1) brightness(1.03);
+    opacity: 0.55;
+}
+
+.locked .noteTitle {
+    opacity: 0.6;
+}
+
+/* הפריט הבא ללחיצה - זוהר צהוב עדין מהבהב עד הלחיצה הראשונה */
+
+.glowing .noteImage,
+.glowing .exerciseImage {
+    animation: softGlow 1.9s ease-in-out infinite;
+}
+
+@keyframes softGlow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(0 0 0.25rem rgba(255, 214, 64, 0.55)) drop-shadow(0 0 0.7rem rgba(255, 196, 32, 0.35));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 0.5rem rgba(255, 226, 92, 0.95)) drop-shadow(0 0 1.5rem rgba(255, 206, 40, 0.8));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .glowing .noteImage,
+    .glowing .exerciseImage {
+        animation: none;
+        filter:
+            drop-shadow(0 0 0.4rem rgba(255, 220, 80, 0.85)) drop-shadow(0 0 1.1rem rgba(255, 206, 40, 0.6));
+    }
+
+    .note,
+    .exercise,
+    .noteImage,
+    .exerciseImage {
+        transition: none;
+    }
+}
 
 @media (max-height: 700px) {
-    .boardArea { top: 14%; width: min(78vw, 108vh, 75rem); }
-    .noteTitle { font-size: clamp(0.7rem, 1.1vw, 1.15rem); }
+    .boardArea {
+        top: 14%;
+        width: min(78vw, 108vh, 75rem);
+    }
 }

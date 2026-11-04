@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import TopicLayout from "../TopicLayout/TopicLayout";
 import styles from "./CasualtyOfficerHighlights.module.css";
@@ -113,6 +112,7 @@ const CasualtyOfficerHighlights = ({ onPageReady }) => {
                                         handleNumberClick(item.id)
                                     }
                                     aria-expanded={isVisited}
+                                    aria-disabled={isVisited}
                                     aria-controls={`officer-tip-${item.id}`}
                                     aria-label={`הצגת דגש ${item.id}`}
                                 >

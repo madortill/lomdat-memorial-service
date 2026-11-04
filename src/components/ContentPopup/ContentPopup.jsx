@@ -7,7 +7,7 @@ import ExerciseContent from "../Exercises/ExerciseContent";
 import { pageCounts } from "../Topics/topicRegistry";
 
 // נושאים בני עמוד אחד שמסתמכים על כפתור "הבנתי!" של הניווט
-const singlePageTopicsWithNavigation = ["casualtyGuidelines"];
+const singlePageTopicsWithNavigation = ["introduction", "casualtyGuidelines"];
 
 export default function ContentPopup({ topic, startRect, onClose, progress, onCompletePage }) {
     const pageCount = pageCounts[topic.id] || 1;
@@ -103,6 +103,7 @@ export default function ContentPopup({ topic, startRect, onClose, progress, onCo
                 type="button"
                 className={styles.navigationNext}
                 disabled={!canMoveForward || closing}
+                title={!canMoveForward ? "כדי להמשיך יש להשלים את העמוד" : undefined}
                 onClick={goForward}
             >
                 {pageIndex === pageCount - 1 ? "הבנתי!" : "הבא"}

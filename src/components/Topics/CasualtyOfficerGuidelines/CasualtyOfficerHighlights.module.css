@@ -107,7 +107,7 @@
     z-index: 2;
 }
 
-.numberButton:hover {
+.itemRow:not(.revealed) .numberButton:hover {
     transform: scale(1.07);
     background: #6e9fc5;
 }
@@ -119,6 +119,7 @@
 
 .revealed .numberButton {
     background: #7faacb;
+    cursor: default;
 }
 
 /* אזור שמור למלבן, גם כשהוא עדיין לא מוצג */

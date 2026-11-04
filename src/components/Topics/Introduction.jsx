@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Introduction.module.css";
 import TopicLayout from "./TopicLayout/TopicLayout";
 
@@ -23,7 +22,7 @@ const cards = [
 
 const VISITED_KEY = "memorial-introduction-visited";
 
-export default function Introduction({ onPageComplete }) {
+export default function Introduction({ onPageReady }) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const [visited, setVisited] = useState(() => {
@@ -42,14 +41,19 @@ export default function Introduction({ onPageComplete }) {
         }
     });
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
     const allVisited = cards.every(card =>
         visited.includes(card.id)
     );
 
+    // אחרי שעברו על כל הדגשים, כפתור "הבנתי!" המשותף של הפתקית נפתח
+    useEffect(() => {
+        if (allVisited) {
+            onPageReady?.();
+        }
+    }, [allVisited, onPageReady]);
+
     const goToCard = (index) => {
-        if (isSubmitting || index === activeIndex) return;
+        if (index === activeIndex) return;
 
         setActiveIndex(index);
 
@@ -69,34 +73,14 @@ export default function Introduction({ onPageComplete }) {
         });
     };
 
-    const finish = () => {
-        if (!allVisited || isSubmitting) return;
-
-        setIsSubmitting(true);
-        onPageComplete?.();
-    };
-
     return (
         <TopicLayout
             title="מבוא"
             className={styles.introduction}
             ariaLabel="מבוא לניהול תיאום אזכרה"
             headerContent={<p className={styles.description}>
-                    צבא ההגנה לישראל מתחייב לשימור הקשר עם המשפחות השכולות ולקיום אזכרה שנתית צבאית לזכר הנופלים. קיום האזכרה מתבצעת כל עוד המשפחה מעוניינת בהשתתפות נציגי צה"ל ויש קרוב משפחה מולו ניתן לתאם. מדובר בתהליך המתקיים לאורך שנים ומהווה חלק משמעותי ומרכזי בשימור הקשר עם המשפחות השכולות.
-                </p>}
-            footer={
-                <div className={styles.footer}>
-                    <button
-                        type="button"
-                        className={styles.understood}
-                        onClick={finish}
-                        disabled={!allVisited || isSubmitting}
-                        title={!allVisited ? "כדי להמשיך יש לעבור על שלושת הדגשים" : undefined}
-                    >
-                        הבנתי!
-                    </button>
-                </div>
-            }
+                צבא ההגנה לישראל מתחייב לשימור הקשר עם המשפחות השכולות ולקיום אזכרה שנתית צבאית לזכר הנופלים. קיום האזכרה מתבצעת כל עוד המשפחה מעוניינת בהשתתפות נציגי צה"ל ויש קרוב משפחה מולו ניתן לתאם. מדובר בתהליך המתקיים לאורך שנים ומהווה חלק משמעותי ומרכזי בשימור הקשר עם המשפחות השכולות.
+            </p>}
         >
             <div className={styles.main}>
                 <div className={styles.carouselGroup}>
@@ -167,8 +151,8 @@ export default function Introduction({ onPageComplete }) {
                             <span
                                 key={card.id}
                                 className={`${styles.dot} ${index === activeIndex
-                                        ? styles.activeDot
-                                        : ""
+                                    ? styles.activeDot
+                                    : ""
                                     }`}
                             />
                         ))}

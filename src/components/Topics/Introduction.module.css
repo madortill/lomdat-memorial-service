@@ -168,38 +168,7 @@
     background: #B4534D;
 }
 
-.footer {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.understood {
-    border: 0;
-    border-radius: 999px;
-    min-width: 90px;
-    padding: 5px 15px;
-    color: white;
-    background: #078EB2;
-    font-weight: 700;
-    font-size: clamp(12px, .9vw, 16px);
-    cursor: pointer;
-}
-
-.understood:disabled {
-    background: #B6B6B6;
-    cursor: not-allowed;
-}
-
-.understood:not(:disabled):hover {
-    background: #06799B;
-}
-
-.understood:focus-visible {
-    outline: 3px solid #087393;
-    outline-offset: 2px;
-}
-
-@media (max-width: 1500px) {
+/* @media (max-width: 1500px) {
     .carousel {
         width: min(78%, 850px);
     }
@@ -233,4 +202,4 @@
     .right {
         transform: translate(-120%, -50%) scale(.71);
     }
-}
+} */

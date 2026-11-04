@@ -236,12 +236,12 @@
     0%,
     100% {
         filter:
-            drop-shadow(0 0 0.25rem rgba(255, 214, 64, 0.55)) drop-shadow(0 0 0.7rem rgba(255, 196, 32, 0.35));
+            drop-shadow(0 0 0.25rem rgba(197, 173, 86, 0.55)) drop-shadow(0 0 0.7rem rgba(206, 176, 93, 0.35));
     }
 
     50% {
         filter:
-            drop-shadow(0 0 0.5rem rgba(255, 226, 92, 0.95)) drop-shadow(0 0 1.5rem rgba(255, 206, 40, 0.8));
+            drop-shadow(0 0 0.5rem rgba(252, 245, 215, 0.95)) drop-shadow(0 0 1.5rem rgba(233, 211, 138, 0.8));
     }
 }
 
